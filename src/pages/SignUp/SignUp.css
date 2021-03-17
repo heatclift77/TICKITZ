@@ -1,0 +1,20 @@
+.siluet{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(43, 21, 107, 0.8);
+}
+.vh-100{
+    height: 100vh;
+}
+.box {
+    background: #666666;
+    color: #ffffff;
+    width: 250px;
+    padding: 10px;
+    margin: 1em auto;
+}
+.hero-size{
+    width: 120%;
+}

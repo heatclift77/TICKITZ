@@ -1,0 +1,7 @@
+.eye-position{
+    top: 60px;
+    right: 18px;
+}
+.eye-position:hover{
+    cursor: pointer;
+}
