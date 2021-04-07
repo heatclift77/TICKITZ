@@ -1,11 +1,14 @@
 import React from 'react'
 import { Routers } from './Config'
+import { Provider } from 'react-redux'
+import store from './Config/redux'
 import './App.css'
-// require('dotenv').config()
 
 const App = () => {
     return (
-        <Routers />
+        <Provider store={store}>
+            <Routers />
+        </Provider>
     )
 }
 

@@ -1,5 +1,4 @@
 import {React} from 'react'
-// import {Small_Button} from '../../atoms'
 
 function Movies({...rest}) {
 

@@ -44,7 +44,7 @@
 .mybtn{
     border: none;
     /* border-radius: 5px; */
-    padding: 0.4rem 1.6rem;
+    padding: 0.2rem 1.6rem;
     background: white;
     box-shadow: 4px 2px 8px rgba(0, 0, 0, 0.2);
     border: 1px solid var(--primry-collor);
@@ -94,7 +94,7 @@
     background: var(--primry-collor) !important;
 }
 .mybg-third{
-    background: var(--third-collor);
+    background: var(--third-collor) !important;
 }
 .second_color_background{
     background: #F5F6F8;
@@ -116,6 +116,7 @@
 }
 .logo-nav{
     width: 120px;
+    cursor: pointer;
 }
 /* ----------- */
 a:hover{
@@ -135,7 +136,6 @@ h2{
     --primry-collor : #5F2EEA;
     --secondary-collor : #DEDEDE;
     --third-collor : #4E4B66;
-    /* --text-label : #6E7191; */
 
 }
 .w-150px{
@@ -432,8 +432,14 @@ h2{
 .myprimary-color{
     color: var(--primry-collor);
 }
+.fs-09{
+    font-size: 0.9rem;
+}
 .fs-08{
     font-size: 0.8rem;
+}
+.fs-12{
+    font-size: 1.2rem;
 }
 .dot{
     width: 5px;
@@ -508,4 +514,35 @@ h2{
 }
 .nowShowingHeight{
     height: 400px;
+}
+.c-none{
+    cursor: text !important;
+}
+.my-modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.btn-img:hover{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 400ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
+.payment-btn:hover > div{
+    border: 1px solid var(--primry-collor) !important;
+}
+.payment-btn-active > div{
+    border: 1px solid var(--primry-collor) !important;
 }

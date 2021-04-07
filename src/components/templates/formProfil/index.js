@@ -1,25 +1,12 @@
-import {React, Fragment, useState, useEffect} from 'react';
+import {React, Fragment, useState} from 'react';
+import { useSelector } from 'react-redux'
 import {TabButton} from '../../atoms';
 import {AcountProfil, OrderHistory} from '../../organism';
 import axios from 'axios';
 
 function FormProfil() {
-    const [data, setData] = useState([])
-    const [AcountSetting, setFirst] = useState(true)
-    const [OrderHistori, setSecond] = useState(false)
-    const id = '7fcd5929-0902-428c-aa62-3af701c33c4c'
-    useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER}/transaction/user/${id}/1`)
-        .then(res =>{
-            setData(res.data.data)
-        })  
-    })
-    function delTrans(id_trans){
-        axios.delete(`${process.env.REACT_APP_SERVER}/transaction/${id_trans}`)
-        .then(res =>{
-            setData(res.data.data)
-        })  
-    }
+    const [AcountSetting, setFirst] = useState(true);
+    const [OrderHistori, setSecond] = useState(false);
     function sendState(state){
         return state
     }
@@ -48,15 +35,7 @@ function FormProfil() {
                     }}/>
                 </div>
             </div>
-            {(AcountSetting) ? <AcountProfil />:  
-            data.map(trans=>{
-                return <OrderHistory 
-                title={trans.movie} 
-                tgl={trans.created_at} 
-                onClick={()=>delTrans(trans.id_transaction)}
-                />
-            })
-            } 
+            {(AcountSetting) ? <AcountProfil />: <OrderHistori/> } 
             
         </Fragment>
     )

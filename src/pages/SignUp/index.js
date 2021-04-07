@@ -14,34 +14,110 @@ export class SignUp extends Component {
         super(props);
         this.state = {
             email : '',
-            password : ''
-        };
+            password : '',
+            checked : false,
+            emailDanger : 'my-input rounded w-100 py-3 px-3',
+            passDanger : 'my-input rounded w-100 py-3 px-3',
+            button : 'py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none',
+            btnStatus : false,
+            Submit : (e) => {
+                const email = this.state.email
+                const pass = this.state.password
+                axios({
+                    method: 'post',
+                    headers: { 'content-type': 'application/json' },
+                    url: `${process.env.REACT_APP_SERVER}/user/register`,
+                    data: {
+                        email: email,
+                        pass: pass
+                    }
+                })
+                .then(res=> {
+                    alert('registered')
+                })
+                .catch(err=> {
+                    this.setState({messageDanger : 'text-danger m-0 py-2'});
+                })
+            },
+            messageDanger: 'hide'
+        }
     }
     handleEmailChange = (e) => {
         this.setState({
-            email : e.target.value         
+            email : e.target.value,
+            emailDanger : 'my-input rounded w-100 py-3 px-3',
+            messageDanger : 'hide'
         })
+        if(e.target.value.length == 0){
+            this.setState({
+                emailDanger : 'my-input rounded w-100 py-3 px-3 border-danger',
+                button : "py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none",
+                btnStatus : false
+            })
+        }else{
+            if(this.state.checked && this.state.password.length != 0){
+                this.setState({
+                    button : "my-btn py-3 px-4 w-100 rounded",
+                    btnStatus : true
+                })
+            }
+        }
     }
     handlePassChange = (e) => {
         this.setState({
-            password : e.target.value
+            password : e.target.value,
+            passDanger : 'my-input rounded w-100 py-3 px-3' 
         })
-    }
-    Submit = () => {
-        const email = this.state.email
-        const pass = this.state.password
-        console.log(email + ' ' + pass);
-        axios({
-            method: 'post',
-            headers: { 'content-type': 'application/json' },
-            url: `${process.env.REACT_APP_SERVER}/user/addUser`,
-            data: {
-                email: email,
-                pass: pass
+        if(e.target.value.length == 0){
+            this.setState({
+                passDanger : 'my-input rounded w-100 py-3 px-3 border-danger',
+                button : "py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none",
+                btnStatus : false
+            })
+        }else{
+            if(this.state.checked && this.state.email.length != 0){
+                this.setState({
+                    button : "my-btn py-3 px-4 w-100 rounded",
+                    btnStatus : true
+                })
             }
-        })
-        .then(res=> console.log(res))
-    } 
+        }
+    }
+    handleCheck = (e) =>{
+        if(this.state.checked){
+            this.setState({
+                checked : false,
+                button : "py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none",
+                btnStatus : false
+            })
+        }else{
+            this.setState({checked : true})
+            if(this.state.email.length == 0 && this.state.password.length == 0){
+                this.setState({
+                    emailDanger : 'my-input rounded w-100 py-3 px-3 border-danger',
+                    passDanger : 'my-input rounded w-100 py-3 px-3 border-danger'
+                })
+            }else{
+                if(this.state.email.length == 0){
+                    this.setState({emailDanger : 'my-input rounded w-100 py-3 px-3 border-danger'})
+                }else{
+                    if(this.state.password == 0){
+                        this.setState({passDanger : 'my-input rounded w-100 py-3 px-3 border-danger'})
+                    }else{
+                        this.setState({
+                            button : "my-btn py-3 px-4 w-100 rounded",
+                            btnStatus : true
+                        })
+                    }
+                }
+            }
+        }
+    }
+    componentDidMount = ()=>{
+        const mapStateToProps = state => ({
+            status: state.user.isLogin
+        });
+    }
     render() {
         return (
             <div class="container-fluid">
@@ -81,13 +157,16 @@ export class SignUp extends Component {
                         <div className="row">
                             <div className="col-11 mt-7 mx-auto">
                                 <h2 className="py-3 fw-600">Fill your additional details</h2>
-                                <MyInput label="Email" placeholder="Write Your Mail" onChange={this.handleEmailChange} />
-                                <InputTypePass label="password" placeholder="Write Your Password" onChange={this.handlePassChange} />
+                                <MyInput label="Email" className={this.state.emailDanger} placeholder="Write Your Mail" onChange={this.handleEmailChange} />
+                                <p className={this.state.messageDanger}>Email Sudah Terdaftar !!!</p>
+                                <InputTypePass label="password" className={this.state.passDanger} placeholder="Write Your Password" onChange={this.handlePassChange} />
                                 <div className="d-flex my-4">
-                                    <input type="checkbox" className="bg-black mr-2" className="my-auto mr-3" />
-                                    <p className="m-0">I agree to terms & conditions</p>
+                                    <input type="checkbox" className="bg-black mr-2" className="my-auto mr-3" checked={this.state.checked} onClick={this.handleCheck} />
+                                    <p className='my-auto'>I agree to terms & conditions</p>
                                 </div>
-                                <MyButton value="Join for free now" onClick={this.Submit} />
+                                <MyButton status='false' value="Join for free now" className={this.state.button} onClick={
+                                    ()=> (this.state.btnStatus) ? this.state.Submit() : function(){}
+                                    } />
                                 <p className="text-center py-4">Do you already have an account ? <Link to="SignIn">Log in</Link></p>
                                 <div className="d-flex justify-content-center">
                                     <FbButton />

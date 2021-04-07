@@ -1,9 +1,29 @@
-import {React, useState} from 'react'
+import { React, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+// image
 import tickitz from '../../../asets/tickitz.png';
-import caret_down from '../../../asets/caret-down.png'
-import search from '../../../asets/search.png'
+import caret_down from '../../../asets/caret-down.png';
+import search from '../../../asets/search.png';
+import image_profil_default from '../../../asets/default.png';
+// add on
+import style from './navbar.module.css';
+import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 function Navbar() {
+    const dispatch = useDispatch()
+    const {user,  isLogin} = useSelector(state => state.user)
+    const [buttonProfil, setButtonProfil] = useState('hide')
+    const [buttonSignUp, setButtonSignUp] = useState('')
+    useEffect(()=>{
+        if(isLogin){
+            setButtonProfil('')
+            setButtonSignUp('hide')
+        }else{
+            setButtonProfil('hide')
+            setButtonSignUp('')
+        }
+    }, [])
     const [show, setShow] = useState('col-12 col-lg-10 mynav-mob-position bg-white')
     const [siluet, setSiluet] = useState("hide-on-lg hide-on-xl siluet")
     const [status, setStatus] = useState(false)
@@ -18,6 +38,13 @@ function Navbar() {
             setStatus(false)
         }
     }
+    function handleLogOut(e){
+        localStorage.removeItem('token')
+        dispatch({
+            type : 'SET_STATUS',
+            isLogin : false
+        })
+    };
     return (
         <nav className="row bg-white position-fixed fixed-top myshadow-for-nav">
             <div className="col-12">
@@ -25,7 +52,9 @@ function Navbar() {
                     <div className="row my-lg-4 d-flex justify-content-between">
                         <div className="col-1 col-lg-2">
                             <div className="my-auto">
-                                <img src={tickitz} className="logo-nav" />
+                                <Link to='/home'>
+                                    <img src={tickitz} className="logo-nav" />
+                                </Link>
                             </div>
                         </div>
                         {/* siluet nav */}
@@ -49,8 +78,29 @@ function Navbar() {
                                     <li className="my-auto mx-lg-5 cover hide-on-sm hide-on-md">
                                         <img src={search} className="" />
                                     </li>
-                                    <li className="my-auto hide-on-sm hide-on-md">
-                                        <button className="mybtn mybtn-active myrounded-1 w-100 ">Sign Up</button>
+                                    <li className="my-auto hide-on-sm hide-on-md position-relative">
+                                        <div className={buttonSignUp}>
+                                            <Link to="/Signup">
+                                                <button className="mybtn mybtn-active myrounded-1 w-100 ">Sign Up</button>
+                                            </Link>
+                                        </div>
+                                        <div className={buttonProfil}>
+                                            <div className={style.image_profil}>
+                                                <img src={(user.img_profil == null)?image_profil_default:user.img_profil} className={style.image_profil} />
+                                                <div className={style.dropdown_profil}>
+                                                    <Link to="/profil_page">
+                                                        <li className="py-2 px-4 border-bottom">
+                                                            <p className="m-0">User Profil</p>
+                                                        </li>
+                                                    </Link>
+                                                    <Link to="/signin">
+                                                        <li className="py-2 px-4" onClick={handleLogOut}>
+                                                            <p className="m-0">LogOut</p>
+                                                        </li>
+                                                    </Link> 
+                                                </div>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
                                 <div className="hide-on-lg hide-on-xl mx-auto my-5 position-relative w-100 px-5">

@@ -1,0 +1,32 @@
+.image_profil{
+    width: 52px;
+    height: auto;
+}
+.image_profil:hover > .dropdown_profil{
+    visibility: visible;
+}
+.dropdown_profil{
+    width: 200px;
+    position: absolute;
+    background: white;
+    border: 1px solid #DEDEDE;
+    border-radius: 0.4rem;
+    top: 120%;
+    right: -16%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    visibility: hidden;
+}
+.dropdown_profil li:hover{
+    background: #DEDEDE;
+}
+.dropdown_profil::before{
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -12px;
+    right: 25px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid #5F2EEA;
+}

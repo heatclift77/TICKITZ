@@ -1,0 +1,18 @@
+.removeComponent{
+    position: relative;
+    right: -65px;
+    top: -38px;
+    cursor: pointer;
+}
+.siluet{
+    opacity: 0;
+    transition: all ease-in-out 0.4s;
+    background: rgba(95, 46, 234, 0.8);
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.wrapper:hover > .siluet{
+    opacity: 100;
+}

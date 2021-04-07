@@ -1,16 +1,17 @@
 import {React, useState, useEffect} from 'react'
+import {useHistory} from 'react-router-dom'
 import {CardMovie2} from '../../molekuls'
 import axios from 'axios'
 
 function NowShowing() {
+    const history = useHistory()
     const [data, setData] = useState([])
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER}/movies/?page=1&limit=5`)
+        axios.get(`${process.env.REACT_APP_GET_TICKET_FILM}`)
         .then(res => {
                 setData(res.data.data)
             }
         )
-        console.log(data);
     },[])
     return (
     <div className="mt-7 nowShowingHeight">
@@ -20,7 +21,14 @@ function NowShowing() {
         </div>
         <div className="d-flex overflow-auto py-5">
                 {data.map(mov=>{
-                    return<CardMovie2 title={mov.title} genre={mov.genre} img={mov.image} id_movie={mov.id_movie} />
+                    if(mov.status == '1'){
+                        return<CardMovie2 title={mov.title} genre={mov.genre} img={mov.image} id_movie={mov.id_movie} onClick={
+                            (e)=>{
+                                history.push(`/ListTayang/${mov.code_ticket}`)
+                            }
+                        } />
+                    }
+                    return '';
                 })}
         </div>
     </div>

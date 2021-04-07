@@ -7,6 +7,7 @@ import hero3 from '../../asets/woman.png'
 // -----------------
 
 export class Home extends Component {
+    
     render() {
         return (
             <>

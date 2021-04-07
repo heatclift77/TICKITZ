@@ -1,48 +1,75 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState} from 'react';
+import { useSelector } from 'react-redux';
 import {Button, Input, SecondInput, InputTypePass} from '../../atoms';
-import { Link, link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert'
 import axios from 'axios';
 
 function AcountProfil() {
-    const [data, setData] = useState({})
-    const [newPassword, setNewPassword] = useState('')
-    useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER}/user/7fcd5929-0902-428c-aa62-3af701c33c4c`)
-        .then(res => {
-            setData(res.data[0])
-            setNewPassword(res.data[0].password)
-        })
-    },[])
-    function handleCekPass(e){
-        if(e.target.value == ''){
-            setNewPassword(data.password)
-        }else{
-            setNewPassword(e.target.value)
-        }
-    }
-    function updateData(e){
+
+    const { user } = useSelector(state=>state.user)
+    const us = user.username;
+    const fn = user.firstName;
+    const ln = user.lastName;
+    const tp = user.telephone;
+    const ip = user.img;
+    const email = user.email;
+    const id_user = user.id_user;
+
+    const [username, setUsername] = useState(us);
+    const [img_Profil, setImage] = useState(ip);
+    const [firstName, setFirstName] = useState(fn);
+    const [lastName, setLastName] = useState(ln);
+    const [telephone, setTelephone] = useState(tp);
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPasword, setConfirmPassword] = useState('');
+
+    // state fro styling
+    const [buttonStyle, setButtonStyle] = useState('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none');
+
+    function updateProfil(e){
         e.preventDefault()
-        if(newPassword == data.password){
-            const url = `${process.env.REACT_APP_SERVER}/user/7fcd5929-0902-428c-aa62-3af701c33c4c`
-            axios({
-                method : 'put',
-                url : url,
-                headers: { 'content-type': 'application/json' },
-                data : {
-                    email : data.email,
-                    password : data.password,
-                    username : data.firstName + ' ' + data.lastName,
-                    telephone : data.telephone,
-                    firstName : data.firstName,
-                    lastName : data.lastName
-                }
-            })
-            .then(res => {
-                console.log(res);
-            })
-            alert('profil berhasil di update')
+        const token = localStorage.getItem('token')
+        axios({
+            method : 'PUT',
+            url : `${process.env.REACT_APP_SERVER}/user/profil/${id_user}`,
+            data : {
+                username : username,
+                firstName : firstName,
+                lastName : lastName,
+                telephone : telephone,
+            },
+            headers : {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(response => {
+            swal('Succes','Profil Updated','success')
+        }).catch(err => {
+            swal('Oops','Internal Server Error','error')
+        })
+    }
+    function updatePassword(){
+        if(newPassword !== '' || confirmPasword !== ''){
+            if(newPassword == confirmPasword){
+                const token = localStorage.getItem('token')
+                axios({
+                    method : 'PUT',
+                    url : `${process.env.REACT_APP_SERVER}/user/profil/setPass/${id_user}`,
+                    data : {
+                        password : newPassword,
+                    },
+                    headers : {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }).then(response => {
+                    swal('Succes','Profil Updated','success')
+                }).catch(err => {
+                    swal('Oops','Internal Server Error','error')
+                })
+            }else{
+            }
         }else{
-            alert('confirm password tidak sama')
+            
         }
     }
     return (
@@ -54,36 +81,52 @@ function AcountProfil() {
                     <hr/>
                 </div>
                 <div className="col-12 col-md-6">
-                    <Input label="FirstName" placeholder="Write Your FirstName" name="FirstName" value={data.firstName} onChange={(e)=>setData({...data, firstName:e.target.value})} />
+                    <Input label="FirstName" placeholder="Write Your FirstName" name="FirstName" value={user.firstName} onChange={(e)=>setFirstName(e.target.value)} />
                 </div>
                 <div className="col-12 col-md-6">
-                    <Input label="LastName" placeholder="Write Your LastName" name="LastName" value={data.lastName} onChange={(e)=>setData({...data, lastName:e.target.value})} />
+                    <Input label="LastName" placeholder="Write Your LastName" name="LastName" value={user.lastName} onChange={(e)=>setLastName(e.target.value)} />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                    <Input label="E-Mail" placeholder="Write Youur Email" name="E-Mail" value={data.email} onChange={(e)=>setData(...data, {email:e.target.value})} />
+                    <Input label="E-Mail" placeholder="Write Your Email" name="E-Mail" value={email} disabled />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                    <SecondInput label="Phone Number" placeholder="Write Your Phone Number" name="PhoneNumber" value={data.telephone} onChange={(e)=>setData({...data, telephone:e.target.value})} />
+                    <SecondInput label="Phone Number" placeholder="Write Your Phone Number" name="PhoneNumber" value={tp} onChange={(e)=>setTelephone(e.target.value)} />
+                </div>
+                <div className="col-12 col-md-6 mb-3">
+                    <Button value="Update Profil" onClick={updateProfil}  />
                 </div>
             </div>
-            {/* <AcountPrivacy /> */}
             <div className="row my-5 bg-white rounded p-3">
                 <div className="col-12">
                     <h5 className="my-2">Account and Privacy</h5>
                     <hr/>
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                    <InputTypePass label="New Password" placeholder="Write Your New Password" onChange={handleCekPass} />
+                    <InputTypePass label="New Password" placeholder="Write Your New Password" onChange={(e)=>{
+                        setNewPassword(e.target.value)
+                        if(e.target.value != ''){
+                            if(e.target.value == confirmPasword){
+                                setButtonStyle('my-btn py-3 px-4 w-100 rounded') 
+                            }else{
+                                setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none')
+                            }
+                        }
+                        }} />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                    <InputTypePass label="Confirm Password" placeholder="Write again Your Password" onChange={(e)=>setData({...data, password:e.target.value})} />
+                    <InputTypePass label="Confirm Password" placeholder="Write again Your Password" onChange={(e)=>{
+                        setConfirmPassword(e.target.value)
+                        if(e.target.value != ''){
+                            if(newPassword == e.target.value){
+                                setButtonStyle('my-btn py-3 px-4 w-100 rounded') 
+                            }else{
+                                setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none')
+                            }
+                        }
+                        }} />
                 </div>
-            </div>
-            <div className="row mb-5">
-                <div className="col-12 col-md-6">
-                    <Link to='profil_page'>
-                        <Button value="Update Change" onClick={updateData}  />
-                    </Link>
+                <div className="col-12 col-md-6 mb-3">
+                    <Button className={buttonStyle} value="Update Password" onClick={updatePassword}  />
                 </div>
             </div>
         </div>

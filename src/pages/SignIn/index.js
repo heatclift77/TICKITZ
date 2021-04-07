@@ -1,12 +1,102 @@
-import React from 'react'
-import { Input as MyInput, InputTypePass, Button as MyButton,
-        GoogleButton, FbButton} from '../../components/atoms';
-import {Link} from 'react-router-dom'
+import { React, useState } from 'react';
+import { Link, useHistory, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
 // image
 import logo from '../../asets/lg_tickitz.png';
 import hero from '../../asets/image_1.jpg';
+import axios from 'axios';
+// add on
+import { Input as MyInput, InputTypePass, Button as MyButton,
+    GoogleButton, FbButton} from '../../components/atoms';
+import swal from 'sweetalert';
 
 const SignIn = () => {
+    const dispatch = useDispatch();
+    let {isLogin} = useSelector(state=>state.user)
+    const history = useHistory();
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+    const [buttonStyle, setButtonStyle] = useState('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none');
+    const [inputStyle, setInputStyle] = useState('my-input rounded w-100 py-3 px-3');
+    const [inputPassStyle, setInputPassStyle] = useState('my-input rounded w-100 py-3 px-3');
+    const [buttonStatus, setButtonStatus] = useState(false);
+    
+    function handleEmailChange(e){
+        setEmail(e.target.value)
+        console.log('email = ' + email);
+        if(e.target.value.length == 0){
+            setInputStyle('my-input rounded w-100 py-3 px-3 border-danger')
+            setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none') /**button mati */
+            setButtonStatus(false)
+        }else{
+            setInputStyle('my-input rounded w-100 py-3 px-3')
+            if(pass.length == 0){
+                setInputPassStyle('my-input rounded w-100 py-3 px-3 border-danger')
+            }else{
+                setButtonStyle('my-btn py-3 px-4 w-100 rounded') /**button hidup */
+                setButtonStatus(true)
+            }
+        }
+    }
+    function handlePassChange(e){
+        setPass(e.target.value)
+        if(e.target.value.length == 0){
+            setInputPassStyle('my-input rounded w-100 py-3 px-3 border-danger')
+            setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none') /**button mati */
+            setButtonStatus(false)
+        }else{
+            setInputPassStyle('my-input rounded w-100 py-3 px-3')
+            if(email.length == 0){
+                setInputStyle('my-input rounded w-100 py-3 px-3 border-danger') 
+            }else{
+                setButtonStyle('my-btn py-3 px-4 w-100 rounded') /**button hidup */
+                setButtonStatus(true)
+            }
+        }
+    }
+    function handleSubmit(e){
+        const url = `${process.env.REACT_APP_SERVER}/user/login`
+        axios({
+            method : 'POST',
+            url : url,
+            data : {
+                email : email,
+                password : pass
+            }
+        }).then(response =>{
+            dispatch({
+                type : 'SET_PROFIL_USER',
+                payload : {
+                    id_user : response.data.data.id_user,
+                    email : response.data.data.email,
+                    password : response.data.data.password,
+                    username : response.data.data.username,
+                    firstName : response.data.data.firstName,
+                    lastName : response.data.data.lastName,
+                    telephone : response.data.data.telephone,
+                    img_profil : response.data.data.img_profil,
+                    role : response.data.data.role
+                }
+            })
+            dispatch({
+                type : 'SET_STATUS',
+                isLogin : true
+            })
+            localStorage.setItem('token', response.data.token)
+            history.push('/home')
+        }).catch(err => {
+            if(err.message == 'Network Error'){
+                swal('Code 500', 'Internal Server Error', 'error')
+            }else{
+                swal('Oops', err.response.data.message, 'error')
+            }
+        })
+    }
+    if(isLogin){
+        return <Redirect to='/Home'/>
+    }else{
+        
+    }
     return (
         <div class="container-fluid">
                 <div class="row vh-100">
@@ -34,11 +124,11 @@ const SignIn = () => {
                                     <p>Sign in with your data that you entered during your registration</p>
                                 </div>
                                 <div className="my-5">
-                                    <MyInput label="Email" placeholder="Write Your Mail" />
-                                    <InputTypePass label="password" placeholder="Write Your Password" />
+                                    <MyInput label="Email" placeholder="Write Your Mail" onChange={handleEmailChange} className={inputStyle} />
+                                    <InputTypePass label="password" placeholder="Write Your Password" onChange={handlePassChange} className={inputPassStyle} />
                                 </div>
-                                <MyButton value="Sign In" />
-                                <p className="text-center py-4">Forgot Your Password ? <Link to="Signup">Reset Now</Link></p>
+                                <MyButton value="Sign In" onClick={(buttonStatus)? handleSubmit: function(){}} className={buttonStyle} />
+                                <p className="text-center py-4">Forgot Your Password ? <Link to="forgotpass">Reset Now</Link></p>
                                 <div className="d-flex justify-content-center">
                                     <FbButton />
                                     <GoogleButton />

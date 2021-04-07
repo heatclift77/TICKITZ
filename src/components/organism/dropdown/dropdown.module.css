@@ -1,0 +1,22 @@
+.dropdownWrapper{
+    width: 230px;
+    background: #EFF0F6;
+    border-radius: 0.4rem;
+}
+.dropdownWrapper:hover{
+    cursor: pointer;
+}
+.textColor{
+    color: #4E4B66;
+}
+.dropdownItem:hover{
+    background: #EFF0F6;
+}
+.show{
+    visibility: visible;
+    width: 230px;
+}
+.hide{
+    visibility: hidden;
+    width: 230px;
+}

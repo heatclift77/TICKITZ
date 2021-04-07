@@ -5,4 +5,10 @@ import FormProfil from './formProfil'
 import Footer from './footer'
 import Navbar from './navbar'
 import MovieInfo from './movie_info'
-export {UpComing, NowShowing, UserCard, FormProfil, Footer, Navbar, MovieInfo}
+import MovieDescription from './movie_description'
+import PremierLocation from './premier_location'
+import ShowTimes from './show_times'
+import CardTicket from './cardTicket'
+export {UpComing, NowShowing, UserCard, FormProfil, 
+    Footer, Navbar, MovieInfo, MovieDescription, 
+    PremierLocation, ShowTimes, CardTicket}

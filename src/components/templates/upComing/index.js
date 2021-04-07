@@ -5,7 +5,7 @@ import axios from 'axios'
 function UpComing() {
     const [data, setData] = useState([])
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER}/movies/?page=1&limit=5`)
+        axios.get(`${process.env.REACT_APP_GET_TICKET_FILM}`)
         .then(res => {
             setData(res.data.data)
         })
@@ -34,7 +34,12 @@ function UpComing() {
             </div>
             <div className="d-flex overflow-auto py-5">
                 {data.map(mov=>{
-                    return <CardMovie title={mov.title} genre={mov.genre} img={mov.image} id_movie={mov.id_movie} />
+                    if(mov.status == '0'){
+                        return <CardMovie title={mov.title} genre={mov.genre} img={mov.image} id_movie={mov.id_movie} />
+                    }else{
+                        return '';
+                    }
+                    
                 })}
             </div>
         </div>
