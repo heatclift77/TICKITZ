@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+<h1 align="center">ARVA ONLINE SHOP</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img height="150" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/1200px-Nextjs-logo.svg.png"/>&nbsp;
+</p>
+<p align="center">
+  Built with Next Js.
+</p>
 
-## Available Scripts
 
-In the project directory, you can run:
+## Dependensi
+- [React Js](https://reactjs.org/)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Bootstrap](https://www.npmjs.com/package/bootstrap)
+- [Sweetalert](https://www.npmjs.com/package/sweetalert)
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+- [Redux](https://www.npmjs.com/package/redux)
+- [React-redux](https://www.npmjs.com/package/react-redux)
+- [Redux-logger](https://www.npmjs.com/package/redux-logger)
+- [Redux-thunk](https://www.npmjs.com/search?q=redux-thunk)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Setting Project
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Silahkan buka terminal pada VScode dengan cara tekan tombol
+```
+CTRL + ` 
+atau
+CTRL + SHIFT + C
+```
 
-### `npm test`
+- Kemudian lakukan install npm terlebih dahulu dengan membuat perintah seperti berikut
+```
+npm install atau npm i
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Jika sudah, maka untuk menjalankan silahkan ketikan perintah berikut ini
+```
+npm run dev
+```
 
-### `npm run build`
+### Kompilasi dan Produksi
+```
+npm run build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## FITUR Tickitz  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Register Page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![register](https://github.com/abudzr/arva-online-shop/blob/upload-image/screencapture-localhost-3000-auth-register-2021-05-10-02_06_36.png)
 
-### `npm run eject`
+### Login Page
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![login](https://github.com/abudzr/arva-online-shop/blob/upload-image/screencapture-localhost-3000-auth-login-2021-05-10-02_04_06.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Reset Password
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![forgot-password](https://github.com/abudzr/arva-online-shop/blob/upload-image/screencapture-localhost-3000-auth-reset-password-2021-05-10-02_13_19.png?raw=true)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Home Page
 
-## Learn More
+![home](https://github.com/abudzr/arva-online-shop/blob/upload-image/screencapture-localhost-3000-app-2021-05-10-02_08_00.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Category Page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![category](https://github.com/abudzr/arva-online-shop/blob/upload-image/screencapture-localhost-3000-app-category-cap-2021-05-10-02_09_38.png)
 
-### Code Splitting
+### Product Details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![product-details](https://github.com/abudzr/arva-online-shop/blob/upload-image/screencapture-localhost-3000-app-product-7-2021-05-10-02_25_06.png)
 
-### Analyzing the Bundle Size
+### Search Product
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![mybag](https://github.com/abudzr/arva-online-shop/blob/upload-image/screencapture-localhost-3000-app-searchProduct-2021-05-10-02_10_44.png)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Backend
+* [`Backend ARVA ONLINE SHOP`](https://github.com/therevolt/BE-ARVA-Shop)
 
-### Advanced Configuration
+## Deploy
+* [`COMING SOON`]
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## Kontributor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<center>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/abudzr">
+          <img width="150" src="https://media-exp1.licdn.com/dms/image/C5603AQHJkatPPZkv3w/profile-displayphoto-shrink_800_800/0/1616558810228?e=1626307200&v=beta&t=ZvN_rhdGzPqdvpsJoOWBwWHZ_-l0MslxoSmu7D3YcYM"><br/>
+          <b>Abu Dzar Al Ghifari</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/therevolt/">
+          <img width="150" src="https://media-exp1.licdn.com/dms/image/C5603AQHWisyVrRhm-Q/profile-displayphoto-shrink_800_800/0/1617809629399?e=1626307200&v=beta&t=Jx9QSk3dCoVZWsdErlwIY6FuoL5tqj3vr49yTRkvoO4" alt="Rama Seftiansyah"><br/>
+          <b>Rama Seftiansyah</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/nevalenaginda">
+          <img width="150" src="https://avatars.githubusercontent.com/u/55057008?s=400&u=fb217ef27a008e647cf48927f153dcbb266ce4d6&v=4" alt="Nevalen Aginda Prasetyo"><br/>
+          <b>Nevalen Aginda Prasetyo</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/heatclift77">
+          <img width="150" src="https://media-exp1.licdn.com/dms/image/C5603AQFZLY_7XQ9k0A/profile-displayphoto-shrink_800_800/0/1617766337918?e=1626307200&v=beta&t=t3BBq8dehfARnHorAe1MyQyXAsJz21Ec4O6_Pmx7wSY" alt="Muhammad Aditya Pratama"><br/>
+          <b>Muhammad Aditya Pratama</b>
+        </a>
+      </td>
+    </tr>
+  </table>
+</center>
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
