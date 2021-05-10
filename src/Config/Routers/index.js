@@ -2,6 +2,7 @@ import React,{useEffect} from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { SignIn, SignUp, Home, ProfilPage, MovieDetails, Payment ,OrderPage, ForgotPass, ConfirmNewPass, Admin} from '../../pages';
+import {Navbar, Footer} from '../../components/templates'
 import PrivateRoute from '../module/profilPage'
 import AdminRoute from '../module/admin'
 import axios from 'axios'
@@ -58,6 +59,7 @@ const Routers = () => {
     })
     return (
         <Router>
+            <Navbar />
             <Switch>
                 <Route path='/SignIn'>
                     <SignIn />
@@ -85,6 +87,7 @@ const Routers = () => {
                     <Home />
                 </Route>
             </Switch>
+            <Footer />
         </Router>
     )
 }

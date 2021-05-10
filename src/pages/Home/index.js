@@ -1,5 +1,5 @@
 import { React, Component } from 'react'
-import {NowShowing, UpComing, Navbar, Footer} from '../../components/templates'
+import {NowShowing, UpComing} from '../../components/templates'
 // ----- image -----
 import hero1 from '../../asets/spider_man.png'
 import hero2 from '../../asets/lion.png'
@@ -11,7 +11,6 @@ export class Home extends Component {
     render() {
         return (
             <>
-                <Navbar />
                 <div className="container pt-7">
                     <div className="row">
                         <div className="col-12 col-sm-12 col-md-6 col-lg-6 text-sm-center text-start d-flex align-self-center">
@@ -36,7 +35,6 @@ export class Home extends Component {
                     </div>
                     <NowShowing />
                     <UpComing />
-                    <Footer />
                 </div>
             </>
         )
