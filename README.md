@@ -47,7 +47,7 @@ npm run build
 * [`COMING SOON`]
 
 ## Backend
-* [`Backend ARVA ONLINE SHOP`](https://github.com/heatclift77/tickitz_api)
+* [`Backend Tickitz API`](https://github.com/heatclift77/tickitz_api)
 
 ## Deploy
 * [`COMING SOON`]
