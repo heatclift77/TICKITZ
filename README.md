@@ -1,10 +1,10 @@
-<h1 align="center">ARVA ONLINE SHOP</h1>
+<h1 align="center">Tickitz</h1>
 
 <p align="center">
-  <img height="150" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/1200px-Nextjs-logo.svg.png"/>&nbsp;
+  <img height="150" src="https://indoittraining.com/wp-content/uploads/sites/3/2020/11/reactjs.png"/>&nbsp;
 </p>
 <p align="center">
-  Built with Next Js.
+  Built with React Js.
 </p>
 
 
@@ -36,7 +36,7 @@ npm install atau npm i
 
 - Jika sudah, maka untuk menjalankan silahkan ketikan perintah berikut ini
 ```
-npm run dev
+npm run start
 ```
 
 ### Kompilasi dan Produksi
