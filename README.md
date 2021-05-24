@@ -1,72 +1,42 @@
-<h1 align="center">Tickitz</h1>
-
 <p align="center">
-  <img height="150" src="https://indoittraining.com/wp-content/uploads/sites/3/2020/11/reactjs.png"/>&nbsp;
+  <a href="" rel="noopener">
+ <img width=400px height=300px src="https://iili.io/B8R3Zv.png" alt="logo"></a>
 </p>
-<p align="center">
-  Built with React Js.
-</p>
+<h3 align="center">Tickitz Apps</h3>
+<div align="center">
+  
+[![Status](https://img.shields.io/website?down_color=red&down_message=Offline&up_color=green&up_message=Online&url=https%3A%2F%2Ftickitz-web.netlify.app)](https://tickitz-web.netlify.app)
 
+</div>
 
-## Dependensi
-- [React Js](https://reactjs.org/)
-- [Axios](https://www.npmjs.com/package/axios)
-- [Bootstrap](https://www.npmjs.com/package/bootstrap)
-- [Sweetalert](https://www.npmjs.com/package/sweetalert)
-- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-- [Redux](https://www.npmjs.com/package/redux)
-- [React-redux](https://www.npmjs.com/package/react-redux)
-- [Redux-logger](https://www.npmjs.com/package/redux-logger)
-- [Redux-thunk](https://www.npmjs.com/search?q=redux-thunk)
+---
 
+## 🧐 About
+Tickitz web app, there are several features such as responsive page, authentication, choose seat, search movie, search and sort cinema by city.
 
-## Setting Project
+THIS PROJECT FOR ARKADEMY TASK!!!
 
-- Silahkan buka terminal pada VScode dengan cara tekan tombol
-```
-CTRL + ` 
-atau
-CTRL + SHIFT + C
-```
+## 🔖Build With
+- Reactjs
+- Bootstrap
 
-- Kemudian lakukan install npm terlebih dahulu dengan membuat perintah seperti berikut
+## 💻 How To Install?
+- Clone This Repo
 ```
-npm install atau npm i
+git clone https://github.com/heatclift77/TICKITZ
 ```
-
-- Jika sudah, maka untuk menjalankan silahkan ketikan perintah berikut ini
-```
-npm run start
-```
-
-### Kompilasi dan Produksi
-```
-npm run build
-```
-## Backend
-* [`COMING SOON`]
+## 🔎 Preview Design <a name = "preview"></a>
+<span>
+    <img width="415" src="https://iili.io/B8RTwG.jpg">   
+    <img width="415" src="https://iili.io/B8Rutf.jpg">   
+    <img width="415" src="https://iili.io/B8R5Ml.jpg">   
+    <img width="415" src="https://iili.io/B8Rcc7.jpg">
+    <img width="415" src="https://iili.io/B8REAu.jpg">
+  <img width="415" src="https://iili.io/B8RXMQ.jpg">
+ </span> 
+ 
+## 💻 Live Demo <a name = "live_demo"></a>
+Coming soon
 
 ## Backend
-* [`Backend Tickitz API`](https://github.com/heatclift77/tickitz_api)
-
-## Deploy
-* [`COMING SOON`]
-
-
-## Kontributor
-
-<center>
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/heatclift77">
-          <img width="150" src="https://media-exp1.licdn.com/dms/image/C5603AQFZLY_7XQ9k0A/profile-displayphoto-shrink_800_800/0/1617766337918?e=1626307200&v=beta&t=t3BBq8dehfARnHorAe1MyQyXAsJz21Ec4O6_Pmx7wSY" alt="Muhammad Aditya Pratama"><br/>
-          <b>Muhammad Aditya Pratama</b>
-        </a>
-      </td>
-    </tr>
-  </table>
-</center>
-
-
-
+#### Repo Backend : https://github.com/heatclift77/tickitz_api
