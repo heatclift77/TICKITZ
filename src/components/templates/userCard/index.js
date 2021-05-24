@@ -1,10 +1,33 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { useSelector } from 'react-redux';
 import {DotButton, ProfilImage} from '../../atoms';
-import default_img_profil from '../../../asets/default.png'
-
+import swal from 'sweetalert'
+import axios from 'axios'
 function UserCard() {
-    const { user } = useSelector(state=>state)
+    const selectImage = useRef(null)
+    const { user } = useSelector(state=>state.user)
+    const [state, setState] = useState({
+        avatar : "",
+        dataImage : "",
+        updateImageButtonToggle : false
+    })
+    useEffect(()=>{
+        setState({...state, avatar:user.img})
+    },[user])
+    const handleUpdateImage = ()=> {
+        const form = new FormData()
+        form.append("id_user", user.id_user)
+        form.append("img", state.dataImage)
+        axios({
+            url:`${process.env.REACT_APP_SERVER}/v1/user/img_profile`,
+            method:"PUT",
+            data:form
+        })
+        .then(res=>{
+            swal("sukses", res.data.message, "success")
+            setState({...state, updateImageButtonToggle:false})
+        })
+    }
     return (
         <div className="bg-white rounded border py-5 px-4">
             <div className="d-flex justify-content-between">
@@ -12,13 +35,43 @@ function UserCard() {
                 <DotButton />
             </div>
             <div className="d-flex justify-content-center">
-                <ProfilImage src={(user.img_profil == null)?default_img_profil:user.img_profil} />
+                <ProfilImage src={state.avatar} />
             </div>
-            <label htmlFor="upload">test</label>
-            <input type='file' id='upload'/>
-            <div className="text-center mt-5">
+            <div className={state.updateImageButtonToggle ? "" : "hide" }>
+                <div className="my-3 d-flex justify-content-around">
+                    <button className="mybg-primary border-0 rounded-pill px-3 py-1 text-white" onClick={handleUpdateImage}>save</button>
+                    <button className="bg-danger border-0 rounded-pill px-3 py-1 text-white" onClick={()=>{
+                        setState({
+                            ...state,
+                            avatar:user.img,
+                            updateImageButtonToggle:false
+                        })
+                    }} >cancel</button>
+                </div>
+            </div>
+            <div className="w-100 text-center my-3">
+                <a className="myprimary-color c-pointer" style={{}} onClick={()=>{
+                    selectImage.current.click()
+                }}>Ubah Profil</a>
+                <input type="file" style={{position:"absolute", top:0, pointerEvents:"none", opacity:0}} ref={selectImage} onChange={(e)=>{
+                    if(e.target.files[0].type == "image/jpeg" || e.target.files[0].type == "image/jpg" || e.target.files[0].type == "image/png"){
+                        if(e.target.files[0].size < 2000000){
+                            setState({
+                                ...state,
+                                avatar:URL.createObjectURL(e.target.files[0]),
+                                dataImage:e.target.files[0],
+                                updateImageButtonToggle:true
+                            })
+                        }else{
+                            swal("Oops", "Ukuran maksimal file hanya 2mb", "error")
+                        }
+                    }else{
+                        swal("Oops", "Hanya mendukung format gambar jpeg, jpg dan png", "error")
+                    }
+                }} />
+            </div>
+            <div className="text-center mt-4">
                 <h2 className="fw-600">{ user.username }</h2>
-                <p className="mygray-color m-0">Moviegoers</p>
             </div>
         </div>
     )

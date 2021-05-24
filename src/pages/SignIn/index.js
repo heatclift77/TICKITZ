@@ -23,7 +23,6 @@ const SignIn = () => {
     
     function handleEmailChange(e){
         setEmail(e.target.value)
-        console.log('email = ' + email);
         if(e.target.value.length == 0){
             setInputStyle('my-input rounded w-100 py-3 px-3 border-danger')
             setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none') /**button mati */
@@ -55,7 +54,7 @@ const SignIn = () => {
         }
     }
     function handleSubmit(e){
-        const url = `${process.env.REACT_APP_SERVER}/user/login`
+        const url = `${process.env.REACT_APP_SERVER}/v1/user/login`
         axios({
             method : 'POST',
             url : url,
@@ -74,7 +73,7 @@ const SignIn = () => {
                     firstName : response.data.data.firstName,
                     lastName : response.data.data.lastName,
                     telephone : response.data.data.telephone,
-                    img_profil : response.data.data.img_profil,
+                    img : response.data.data.img_profil,
                     role : response.data.data.role
                 }
             })
@@ -83,17 +82,13 @@ const SignIn = () => {
                 isLogin : true
             })
             localStorage.setItem('token', response.data.token)
-            history.push('/home')
+            history.push('/app/home')
         }).catch(err => {
-            if(err.message == 'Network Error'){
-                swal('Code 500', 'Internal Server Error', 'error')
-            }else{
-                swal('Oops', err.response.data.message, 'error')
-            }
+            swal('Oops', err.response.data.message, 'error')
         })
     }
     if(isLogin){
-        return <Redirect to='/Home'/>
+        return <Redirect to='/app/Home'/>
     }else{
         
     }
@@ -120,18 +115,17 @@ const SignIn = () => {
                         <div className="row mt-5 mx-auto">
                             <div className="col-11">
                                 <div className="mb-5">
-                                    <h3 className="font-weight-bold">Sign In</h3>
+                                    <h2 className="font-weight-bold">Sign In</h2>
                                     <p>Sign in with your data that you entered during your registration</p>
                                 </div>
                                 <div className="my-5">
                                     <MyInput label="Email" placeholder="Write Your Mail" onChange={handleEmailChange} className={inputStyle} />
                                     <InputTypePass label="password" placeholder="Write Your Password" onChange={handlePassChange} className={inputPassStyle} />
                                 </div>
-                                <MyButton value="Sign In" onClick={(buttonStatus)? handleSubmit: function(){}} className={buttonStyle} />
+                                    <MyButton value="Sign In" disabled={buttonStatus ? false : true} onClick={handleSubmit} className={buttonStyle} />
                                 <p className="text-center py-4">Forgot Your Password ? <Link to="forgotpass">Reset Now</Link></p>
-                                <div className="d-flex justify-content-center">
-                                    <FbButton />
-                                    <GoogleButton />
+                                <div className="w-100">
+                                    <button className="w-100 text-white border-0 rounded py-3" style={{background:"#ebdb34"}} onClick={()=>{history.push("/auth/signup")}}>Sign Up</button>
                                 </div>
                             </div>
                         </div>

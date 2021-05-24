@@ -8,6 +8,7 @@ import hero from '../../asets/image_1.jpg';
 // ---------- ------
 import axios from 'axios'
 import './SignUp.css';
+import swal from 'sweetalert';
 
 export class SignUp extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export class SignUp extends Component {
                     }
                 })
                 .then(res=> {
-                    alert('registered')
+                    swal("success", "pendaftaran Berhasil, silahkan cek email anda", "success")
                 })
                 .catch(err=> {
                     this.setState({messageDanger : 'text-danger m-0 py-2'});

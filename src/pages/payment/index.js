@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Navbar, Footer } from '../../components/templates'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
+import swal from 'sweetalert'
+
 import gplay from '../../asets/lg_gglpay.png'
 import visa from '../../asets/lg_visa.png'
 import gopay from '../../asets/lg_gopay.png'
@@ -12,34 +15,55 @@ import bri from '../../asets/lg_bri.png'
 import ovo from '../../asets/lg_ovo.png'
 
 function Payment() {
-    const { data } = useSelector(state => state.order_details)
+    const history = useHistory()
+    const  data  = JSON.parse(localStorage.getItem("_SET_DETAIL_PESANAN"))
     const { user } = useSelector(state => state.user)
-    const code = useSelector(state => state.helper)
     const [btnpayment, setBtnPayment] = useState({
         paymentSelected: '',
         index: -1
     })
-    // if (window.performance) {
-    //     if (performance.navigation.type == 1) {
-    //         alert("This page is reloaded");
-    //     } else {
-    //         alert("This page is not reloaded");
-    //     }
-    // }
-    const handleReqOrder = (e)=>{
-        const data_seat =  data.data_seat.substring(0, data.data_seat.length -1).split(',').map(item=>{
-            return code.data.seat.replace(item,'SOLD OUT')
-        })  
-        axios({
-            method : 'POST',
-            url : `${process.env.REACT_APP_SERVER}/reqTransaction`,
-            data : {
-                id_user : user.id_user,
-                id_ticket : '',
-                seat : data_seat,
-                order_code : code.order_code
+    const handleReqOrder = (e)=>{ 
+        if(btnpayment.paymentSelected.length !== 0){
+            const detail_pesanan = {
+                id_movie : data.id_movie,
+                id_user :  data.id_user,
+                id_cinema : data.id_cinema,
+                cinema : data.cinema,
+                alamat_cinema :data.alamat_cinema,
+                kursi : data.kursi,
+                harga : data.harga,
+                jumlah_tiket : data.jumlah_tiket,
+                movie : data.movie,
+                jam_tayang : data.jam_tayang,
+                tanggal : data.tanggal,
+                bank : btnpayment.paymentSelected,
+                data_kursi_cinema : data.data_kursi_cinema
             }
-        })
+            axios({
+                method : 'POST',
+                url : `${process.env.REACT_APP_SERVER}/v1/ticket`,
+                data : detail_pesanan
+            })
+            .then(res =>{
+                swal("success", "transaksi berhasil", "error")
+                history.push(`/app/user/ticket/${res.data.data.id_tiket}`)
+            })
+            .catch(err => {
+                console.log(err.response);
+            })
+        }else{
+            swal("Oops", "pilih metode pembayarannya dulu", "error")
+        }
+    }
+    const formatRbuan = (value) => {
+        const sisa = value.toString().length % 3
+        let rupiah = value.toString().substr(0, sisa)
+        const ribuan = value.toString().substr(sisa).match(/\d{3}/g);
+        if (ribuan) {
+            const separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+        return rupiah
     }
     return (
         <>
@@ -49,35 +73,35 @@ function Payment() {
                     <div className="col-12 col-sm-12 col-lg-7">
                         {/*  */}
                         <div className="mt-3">
-                            <h4 className="font-weight-bold py-2">Payment Info</h4>
+                            <h4 className="font-weight-bold py-2">Informasi Pembayaran</h4>
                             <div className="row bg-white myrounded-2">
                                 <div className="col-12 py-3 px-4">
                                     <div className="d-flex justify-content-between border-bottom">
-                                        <p className="mygray-color my-3">Date & time</p>
-                                        <p className="my-3">{data.dateNtime}</p>
+                                        <p className="mygray-color my-3">waktu & tgl</p>
+                                        <p className="my-3">{data.tanggal} @ {data.jam_tayang}</p>
                                     </div>
                                     <div className="d-flex justify-content-between border-bottom">
-                                        <p className="mygray-color my-3">Movie title</p>
-                                        <p className="my-3">{data.movie_title}</p>
+                                        <p className="mygray-color my-3">Judul Film</p>
+                                        <p className="my-3">{data.movie}</p>
                                     </div>
                                     <div className="d-flex justify-content-between border-bottom">
-                                        <p className="mygray-color my-3">Cinema Name</p>
-                                        <p className="my-3">{data.cinema_name}</p>
+                                        <p className="mygray-color my-3">Cinema</p>
+                                        <p className="my-3">{data.cinema}</p>
                                     </div>
                                     <div className="d-flex justify-content-between border-bottom">
-                                        <p className="mygray-color my-3">Number of tickets</p>
-                                        <p className="my-3">{data.ticket_count}</p>
+                                        <p className="mygray-color my-3">Jumlah Tiket</p>
+                                        <p className="my-3">{data.jumlah_tiket}</p>
                                     </div>
                                     <div className="d-flex justify-content-between">
-                                        <p className="mygray-color my-3">Total Payment</p>
-                                        <h5 className="font-weight-bold my-3">${data.total_price}</h5>
+                                        <p className="mygray-color my-3">Total Pembayaran</p>
+                                        <h5 className="font-weight-bold my-3">Rp {formatRbuan(data.harga)}</h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {/*  */}
                         <div className="mt-5">
-                            <h4 className="font-weight-bold py-2">Choose a Payment Method</h4>
+                            <h4 className="font-weight-bold py-2">Pilih Metode Pembayaran</h4>
                             <div className="row bg-white myrounded-2 py-4">
                                 <div className="col-12 py-3 px-4 relative">
                                     <div className="row">
@@ -138,7 +162,7 @@ function Payment() {
                         <div class="row bg-white myrounded-2 px-3">
                             <div class="col-12 my-3">
                                 <label for="" class="mygray-color">FullName</label>
-                                <input type="text" class="myrounded-2 w-100 py-3 px-3 border text-secondary" placeholder="write your Name" value={user.firstName + ' ' + user.lastName} disabled />
+                                <input type="text" class="myrounded-2 w-100 py-3 px-3 border text-secondary" placeholder="write your Name" value={user.username} disabled />
                             </div>
                             <div class="col-12 my-3">
                                 <label for="" class="mygray-color">Email</label>
@@ -160,16 +184,19 @@ function Payment() {
                     <div className="col-12 col-lg-7">
                         <div className="row justify-content-lg-between">
                             <div className="col-12 col-lg-5">
-                                <button className="mybtn myrounded-1 w-100 font-weight-bold py-2 hide-on-sm hide-on-md">previous step</button>
+                                <button className="mybtn myrounded-1 w-100 font-weight-bold py-2 hide-on-sm hide-on-md" 
+                                onClick={()=>{
+                                    history.push("/app/order_page")
+                                }}
+                                >Step Sebelumnya</button>
                             </div>
                             <div className="col-12 col-lg-5">
-                                <button className="mybtn mybtn-active myrounded-1 w-100 py-2 py-sm-3 py-lg-2" onClick={handleReqOrder}>pay your order</button>
+                                <button className="mybtn mybtn-active myrounded-1 w-100 py-2 py-sm-3 py-lg-2" onClick={handleReqOrder}>Bayar Pesanan</button>
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
 
     )

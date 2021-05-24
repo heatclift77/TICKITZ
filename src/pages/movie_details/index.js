@@ -1,144 +1,156 @@
 import { React, useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navbar, Footer, MovieInfo } from '../../components/templates'
 import { Dropdown, InputDate } from '../../components/organism'
 import axios from 'axios'
-
+import swal from "sweetalert"
 function MovieDetails() {
+    // for pagination
+    const limit = 3
+    // 
+    const { user } = useSelector(state => state.user)
     const dispatch = useDispatch()
-    const [data, setData] = useState({
-        cardIndex : 0,
-        timeValue : ''
-    })
-    const [buttonControl, setButtonControl] = useState({
-        style : {
-            active : 'color-primary border-0 bg-transparent',
-            inActive : 'bg-transparent border-0' 
-        },
-        object : null,
-        Card : null
-    })
     const history = useHistory()
     const [movie, setMovie] = useState({})
-    const [listTayang, setListTayang] = useState([])
+    const [cinema, setCinema] = useState([])
     const { code } = useParams();
     const [dateValue, setDateValue] = useState('Set Date')
+    const [cinemaSelected, setCinemaSelected] = useState("")
+    const [jamTayang, setJamTayang] = useState("")
+    const [page, setPage] = useState([])
+    const [paginationSelected, setPaginationSelected] = useState(1)
+    const [dropdown, setDropdown] = useState({
+        value: "",
+        list: ["ALL","JAKARTA", "SEMARANG", "SURABAYA", "BALI"]
+    })
     useEffect(() => {
-        axios.get(`http://localhost:5000/v1/movie/details?id=${code}`)
+        axios.get(`${process.env.REACT_APP_SERVER}/v1/cinema?limit=${limit}&offset=0`)
+            .then(response => {
+                setCinema(response.data.data)
+                setPage(response.data.page);
+            })
+            .catch(err => {
+                console.log(err.response);
+            })
+    }, [code])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_SERVER}/v1/movie/details?id=${code}`)
             .then(res => {
                 setMovie(res.data.data[0])
             })
             .catch(err => {
                 if (err.message == 'Request failed with status code 404') {
-                    history.push('/home')
                 }
             })
-        axios.get(`http://localhost:5000/v1/cinema_list?code_ticket=` + code)
-            .then(response => {
-                setListTayang(response.data.data)
-            })
-    }, [code])
+    }, [])
+    const formatRbuan = (value) => {
+        const sisa = value.length % 3
+        let rupiah = value.substr(0, sisa)
+        const ribuan = value.substr(sisa).match(/\d{3}/g);
+        if (ribuan) {
+            const separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+        return rupiah
+    }
     return (
         <>
             <Navbar />
             <div className="container mt-7">
                 <MovieInfo
+                    image={movie.image}
                     title={movie.title}
-                    synopsis={movie.synopsis}
                     genre={movie.genre}
-                    releaseDate={movie.release_date}
-                    directedBy={movie.directed_by}
+                    price={movie.price}
+                    release_date={movie.release_date}
+                    directed_by={movie.directed_by}
                     duration={movie.duration}
                     casts={movie.casts}
-                    img={movie.image}
+                    synopsis={movie.synopsis}
                 />
                 <div className="row my-5">
-                    <div className="col-6 mx-auto text-center">
-                        <h5 className='fw-600'>ShowTimes and Tickets</h5>
-                        <div className="d-flex justify-content-between my-5">
-                            <InputDate
-                            value={dateValue}
-                            onChange={(e)=>{
-                                setDateValue(e.target.value)
-                                axios.get(`http://localhost:5000/v1/cinema_list/specific?date=${e.target.value}&code_ticket=${code}`)
-                                .then(response => {
-                                    setListTayang(response.data.data)
-                                })
-                                .catch(err => {
-                                    if(err.message == 'Request failed with status code 404'){
-                                        setListTayang([])
-                                    }
-                                })
-                            }}
-                            />
-                            <Dropdown />
+                    <div className="col-12 text-center">
+                        <h5 className='fw-600'>Tonton di Bioskop kesayangan anda</h5>
+                        <div className="row" style={{ marginTop: "5rem" }}>
+                            <div className="col-12 col-md-10 col-lg-8">
+                                <div className="">
+                                    <p className="text-left font-weight-bold">temukan di kota anda :</p>
+                                </div>
+                                <div className="d-flex justify-content-start">
+                                    <select className="w-50 border rounded py-2 px-3 mr-auto" style={{outline:"none"}} onChange={(e)=> {
+                                        axios.get(`${process.env.REACT_APP_SERVER}/v1/cinema/sort?kota=${e.target.value}&limit=${limit}&offset=0`)
+                                        .then(response => {
+                                            setCinema(response.data.data)
+                                            setPage(response.data.page);
+                                        })
+                                    }} >
+                                        {dropdown.list.map(kota=>{
+                                            return <option>{kota}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {/* card */}
                 <div className="row">
-                    {listTayang.map((list, Cardindex) => {
-                        return <div className="col-4">
+                    {cinema.map((item, indexCard) => {
+                        return <div className="col-12 col-md-6 col-lg-4">
                             <div className="row myrounded-2 my-3 py-4 mx-1 border shadow">
                                 <div className="col-12">
                                     <div>
                                         <div className="row border-bottom">
                                             <div className="col-12">
                                                 <div className="row">
-                                                    <div className="col-12 col-md-12 col-lg-6 mt-lg-3">
-                                                        <div className="d-flex justify-content-center">
-                                                            <img src={list.img} className='w-100' />
+                                                    <div className="col-12 col-md-12 col-lg-6 mt-lg-3 my-auto">
+                                                        <div className="align-self-center hide-on-sm hide-on-md">
+                                                            <img src={item.img} className='w-100' />
                                                         </div>
                                                     </div>
                                                     <div className="col-12 col-md-12 col-lg-6">
-                                                        <p className="mygray-color text-center text-lg-left pt-3">{list.alamat}</p>
+                                                        <h2 className="m-0 text-center text-lg-left">{item.cinema}</h2>
+                                                        <p className="mygray-color text-center text-lg-left" style={{ fontSize: "14px" }}>{item.alamat}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="row my-3">
-                                            {list.jam.split(',').map((jam, selfIndex)=>{
-                                                return  <div className="col-4 col-md-3 col-lg-3 fs-09 c-pointer">
-                                                <button onClick={(e)=>{
-                                                    setButtonControl({ 
-                                                        ...buttonControl, 
-                                                        object : selfIndex,
-                                                        Card : Cardindex
-                                                    })
-                                                    setData({timeValue:jam})
-                                                }} value={jam} className={buttonControl.object == selfIndex && buttonControl.Card == Cardindex?buttonControl.style.active:buttonControl.style.inActive}>{jam}</button>
-                                            </div>
+                                            {item.list_tayang.split(",").map((jam) => {
+                                                return <div className="col-4 col-lg-4 col-xl-4" onClick={() => {
+                                                    setCinemaSelected(indexCard)
+                                                    setJamTayang(jam)
+                                                }
+                                                } >
+                                                    <p className={cinemaSelected == indexCard && jamTayang == jam ? "mybg-primary text-white text-center py-1 rounded" : "mygray-color text-center hover-color-primary py-1"} style={{ fontSize: "14px" }}>{jam}</p>
+                                                </div>
                                             })}
-                                        </div>
-                                        <div className="d-flex justify-content-between">
-                                            <p className="mygray-color font-weight-bold">Price</p>
-                                            <p className="font-weight-bold">${list.price}/seat</p>
                                         </div>
                                         <div className="row mt-5">
                                             <div className="col-10 col-md-12 col-lg-12 mx-auto">
                                                 <div className="row">
-                                                    <div className="col-6 col-md-12 col-lg-6">
-                                                        <button className="mybtn mybtn-active w-100 myrounded-1" onClick={(e)=>{
-                                                            history.push(`/order_page`)
-                                                            dispatch({
-                                                                type : 'SET_DATA_TICKET',
-                                                                payload : {
-                                                                    title : movie.title,
-                                                                    cinema : list.cinema,
-                                                                    cinema_img : list.img,
-                                                                    show_time : data.timeValue,
-                                                                    price   : list.price,
-                                                                    seat    : list.no_seat,
-                                                                    tgl : list.tgl,
-                                                                    show_time : data.timeValue,
-                                                                    order_code : list.order_code
+                                                    <div className="col-12 col-md-12 col-lg-12 col-xl-6 mb-3 ml-auto">
+                                                        <button className="mybtn mybtn-active w-100 myrounded-1" onClick={(e) => {
+                                                            if (cinemaSelected == indexCard) {
+                                                                const data = {
+                                                                    id_movie: code,
+                                                                    id_user: user.id_user,
+                                                                    id_cinema: item.id_cinema,
+                                                                    cinema: item.cinema,
+                                                                    alamat_cinema: item.alamat,
+                                                                    jam_tayang: jamTayang,
+                                                                    movie: movie.title,
+                                                                    harga: movie.price,
+                                                                    kursi: item.kursi,
+                                                                    cinema_logo: item.img
                                                                 }
-                                                            })
+                                                                localStorage.setItem("_DATA_PESANAN", JSON.stringify(data))
+                                                                history.push(`/app/order_page`)
+                                                            } else {
+                                                                swal("Oops", "silahkan pilih jam tayang nya", "error")
+                                                            }
                                                         }}>book now</button>
-                                                    </div>
-                                                    <div className="col-6 col-md-12 col-lg-6 justify-content-center align-self-center text-center my-md-3 my-lg-0">
-                                                        <a class="color-primary font-weight-bold px-4 px-sm-4 px-md-0 px-lg-0">add to chart</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,9 +160,28 @@ function MovieDetails() {
                             </div>
                         </div>
                     })}
+                    <div className="col-12 my-5">
+                        <div className="d-flex">
+                            {(page.map(page=>{
+                                return <button className={paginationSelected === page.number ? "pagination pagination-active mx-2" : "pagination mx-2"} onClick={()=>{
+                                    axios.get(page.link)
+                                        .then(res => {
+                                            setPaginationSelected(page.number)
+                                            setCinema(res.data.data)
+                                            setPage(res.data.page);
+                                        })
+                                }} >{page.number}</button>
+                            }))}
+                        </div>
+                    </div>
+                    <div className={cinema.length === 0 ? "col-12" : "hide"}>
+                        <h2 className="text-center my-5">
+                            Maaf mungkin di Kota anda saat ini belum ada <strong className="text-danger">404</strong>
+                        </h2>
+                    </div>
                 </div>
-                <Footer />
             </div>
+            <Footer />
         </>
     )
 }

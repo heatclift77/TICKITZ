@@ -1,32 +1,47 @@
 // STATE GLOBAL
 let initialState = {
-    isLogin : false,
-    user : {
-        id_user : '',
-        email : '',
-        password : '',
-        firstname : '',
-        lastname : '',
-        telephone : '',
-        username : '',
-        img : '',
-        role : ''
+    isLogin: false,
+    user: {
+        id_user: '',
+        email: '',
+        password: '',
+        firstname: '',
+        lastname: '',
+        telephone: '',
+        username: '',
+        img: '',
+        role: ''
     }
 }
 // USER REDUCER
-const userState = (state = initialState, action)=>{
-    switch(action.type){
-        case 'SET_STATUS' :
+const userState = (state = initialState, action) => {
+    switch (action.type) {
+        case 'SET_STATUS':
             return {
                 ...state,
-                isLogin : action.isLogin,
+                isLogin: action.isLogin,
             }
-        case 'SET_PROFIL_USER' :
+        case 'SET_PROFIL_USER':
             return {
                 ...state,
-                user : action.payload,
+                user: action.payload,
             }
-        default : return state
+        case 'LOGOUT':
+            return {
+                isLogin: false,
+                user: {
+                    id_user: '',
+                    email: '',
+                    password: '',
+                    firstname: '',
+                    lastname: '',
+                    telephone: '',
+                    username: '',
+                    img: '',
+                    role: ''
+                }
+            }
+        default: return state
     }
 }
 

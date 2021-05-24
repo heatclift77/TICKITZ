@@ -35,7 +35,7 @@ function FormProfil() {
                     }}/>
                 </div>
             </div>
-            {(AcountSetting) ? <AcountProfil />: <OrderHistori/> } 
+            {(AcountSetting) ? <AcountProfil />: <OrderHistory/> } 
             
         </Fragment>
     )

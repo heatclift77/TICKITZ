@@ -8,5 +8,9 @@ import OrderPage from './order_page';
 import ForgotPass from './forgot_pass';
 import ConfirmNewPass from './confirm_new_pass'
 import Admin from './admin'
+import TicketResult from './ticketResult'
+import NotFoundPage from './404Page'
+import Movies from './movies'
+import ChangeFilm from './changeFilm'
 
-export {SignUp, SignIn, Home, ProfilPage, MovieDetails, Payment, OrderPage, ForgotPass, ConfirmNewPass, Admin};
+export {SignUp, SignIn, Home, ProfilPage, MovieDetails, Payment, OrderPage, ForgotPass, ConfirmNewPass, Admin, TicketResult, NotFoundPage, Movies, ChangeFilm};

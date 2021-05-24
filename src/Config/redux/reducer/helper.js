@@ -1,10 +1,12 @@
 let initialState = {
     data : {
-        title : '',
-        cinema_img : '',
-        show_time : '',
-        price   : '',
-        seat    : ''
+        id_movie : "",
+        id_user :  "",
+        cinema : "",
+        alamat_cinema :"",
+        jam_tayang : "",
+        movie : "",
+        harga : ""
     }
 }
 

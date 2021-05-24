@@ -2,7 +2,7 @@ import React from 'react'
 
 function SecondInput({label, ...rest}) {
     return (
-        <div className="mt-3">
+        <div className="">
             <p className="">{label}</p>
             <div className="my-input rounded">
                 <div className="d-flex my-2">

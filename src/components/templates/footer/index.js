@@ -7,8 +7,10 @@ import fb from '../../../asets/lg_fb.png';
 import ig from '../../../asets/lg_ig.png';
 import twt from '../../../asets/lg_tw.png';
 import yt from '../../../asets/lg_yt.png';
-
+import { useSelector } from 'react-redux';
 function Footer() {
+    const path = window.location.pathname.split("/")[1]
+    const {isLogin} = useSelector(state => state.user)
     return (
         <div className="container">
             <div className="row bg-white mt-5">

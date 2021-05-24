@@ -24,7 +24,7 @@ function NowShowing() {
                     if(mov.status == '1'){
                         return<CardMovie2 title={mov.title} genre={mov.genre} img={mov.image} id_movie={mov.id_movie} onClick={
                             (e)=>{
-                                history.push(`/ListTayang/${mov.code_ticket}`)
+                                history.push(`/app/ListTayang/${mov.code_ticket}`)
                             }
                         } />
                     }
