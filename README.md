@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=400px height=300px src="https://iili.io/B8R3Zv.png" alt="logo"></a>
+ <img width=300px height=120px src="https://iili.io/B8R3Zv.png" alt="logo"></a>
 </p>
 <h3 align="center">Tickitz Apps</h3>
 <div align="center">
