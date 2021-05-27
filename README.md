@@ -25,6 +25,18 @@ THIS PROJECT FOR ARKADEMY TASK!!!
 ```
 git clone https://github.com/heatclift77/TICKITZ
 ```
+- Go to the folder
+```
+cd TICKITZ
+```
+- Install Module
+```
+npm install
+```
+- done
+```
+npm start
+```
 ## 🔎 Preview Design <a name = "preview"></a>
 <span>
     <img width="415" src="https://iili.io/B8RTwG.jpg">   
