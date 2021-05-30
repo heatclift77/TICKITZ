@@ -48,7 +48,7 @@ npm start
  </span> 
  
 ## 💻 Live Demo <a name = "live_demo"></a>
-Coming soon
+https://60b3b42f4a73d2072aa8c486--fervent-boyd-23037e.netlify.app/auth/SignIn
 
 ## Backend
 #### Repo Backend : https://github.com/heatclift77/tickitz_api
