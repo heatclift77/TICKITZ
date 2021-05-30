@@ -1,115 +1,46 @@
-import React,{useState} from 'react';
-import {useSelector} from 'react-redux';
-import {MovieDescription, PremierLocation, ShowTimes} from '../../components/templates'
+import React, {useState, useEffect} from 'react';
+// import {useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom'
+import {Navbar, Footer} from '../../components/templates'
+import axios from 'axios'
 
 function Admin() {
-    // const {data} = useSelector(state=>state.product)
-    const [movie, setMovie] = useState({
-        name : '',
-        category : '',
-        release_date : 'Set Date',
-        duration : {
-            hours : '0 hours',
-            minutes : '0 minutes'
-        },
-        director : '',
-        casts : '',
-        synopsis : ''
-    })
-    function handleName(e){
-        setMovie({
-            ...movie,
-            name : e.target.value
-        })
-    }
-    function handleCategory(e){
-        setMovie({
-            ...movie,
-            category : e.target.value
-        })
-    }
-    function handleRelease_date(e){
-        setMovie({
-            ...movie,
-            release_date : e.target.value
-        })
-    }
-    function handleDirector(e){
-        setMovie({
-            ...movie,
-            director : e.target.value
-        })
-    }
-    function handleCasts(e){
-        setMovie({
-            ...movie,
-            casts : e.target.value
-        })
-    }
-    function handleSynopsis(e){
-        setMovie({
-            ...movie,
-            synopsis : e.target.value
-        })
-    }
-    function handleHours(e){
-        setMovie({
-            ...movie,
-            duraion : {
-                ...movie.duration,
-                hours : e.target.value
+    const history = useHistory()
+    const [movie, setMovie] = useState([])
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_GET_TICKET_FILM}`)
+            .then(res => {
+                setMovie(res.data.data)
             }
-        })
-    }
-    function handleMinutes(e){
-        setMovie({
-            ...movie,
-            duraion : {
-                ...movie.duration,
-                minutes : e.target.value
-            }
-        })
-    }
-    function getImg(e){
-        console.log(e.target);
-    }
+        )
+    }, [])
     return (
-        <div className='mybg-second'>
-            <div className='container py-5'>
-                <div className='row'>
-                    <div className="col-12 col-lg-7">
-                        <MovieDescription
-                        handleName = {handleName}
-                        handleCategory = {handleCategory}
-                        handleRelease_date = {handleRelease_date}
-                        handleHours = {handleHours} 
-                        handleMinutes = {handleMinutes}
-                        dateValue = {movie.release_date}
-                        handleDirector = {handleDirector}
-                        handleCasts = {handleCasts}
-                        handleSynopsis= {handleSynopsis}
-                        getImg = {getImg}
-                        />
+        <>
+            <Navbar />
+            <div className="container" style={{marginTop:"8rem"}}>
+                <div className="row" style={{minHeight:"600px"}}>
+                    <div className="col-2 my-3">
+                        <div className="bg-white w-100 rounded p-3 d-flex justify-content-center shadow" style={{minHeight:"300px"}}>
+                            <div className="align-self-center">
+                                <a className="color-primary font-weight-bold hover-reduce-opacity" style={{cursor:"pointer"}}>Add Movie</a>
+                            </div>
+                        </div>
                     </div>
-                    <div className='col-12 col-lg-5'>
-                        <PremierLocation />
-                        <ShowTimes  />
+                    {movie.map(mov=>{
+                        return <div className="col-2 my-3">
+                        <div className="bg-white w-100 rounded p-2 shadow">
+                            <div className="rounded overflow-hidden">
+                                <img src={mov.image} className="w-100" />
+                            </div>
+                            <h4 className="m-0 my-3 font-weight-bold text-center">{mov.title}</h4>
+                            <button class="mybtn rounded fs-08 fw-600 mt-lg-3 w-100" onClick={()=>{history.push(`/app/admin/movieDetails/${mov.id_movie}`)}} >atur</button>
+                        </div>
                     </div>
-                    <div className='col-12 col-lg-5 my-5'>
-                        <button type='submit' className='mybtn mybtn-active myrounded-1 w-100 py-3' onClick={(e)=>{
-                            e.preventDefault()
-                            const form = new FormData()
-                            form.append('movie', movie.name)
-                            form.append('movie', movie.name)
-                            form.append('movie', movie.name)
-                            form.append('movie', movie.name)
-                            form.append('movie', movie.name)
-                            form.append('movie', movie.name)
-                        }}>Submit</button>
-                    </div>
+                    })}
                 </div>
             </div>
-        </div>
+            <Footer />
+        </>
     )
 }
 

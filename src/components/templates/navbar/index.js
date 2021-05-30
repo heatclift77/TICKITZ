@@ -52,7 +52,7 @@ function Navbar() {
         <nav className="row bg-white position-fixed fixed-top shadow">
             <div className="col-12">
                 <div className="container my-4 my-lg-0">
-                    <div className="row my-lg-4 d-flex justify-content-between">
+                    <div className="row d-flex justify-content-between">
                         <div className="col-1 col-lg-2 my-auto">
                             <div className="my-auto">
                                 <Link to='/app/home'>
@@ -72,6 +72,11 @@ function Navbar() {
                                     <li className="mr-lg-4 py-3 py-lg-0 myline-nav text-center nav-link"><a className="color-third fw-600">Movies</a></li>
                                     <li className="mr-lg-4 py-3 py-lg-0 myline-nav text-center nav-link"><a className="color-third fw-600">Cinemas</a></li>
                                     <li className="mr-lg-4 py-3 py-lg-0 myline-nav text-center nav-link"><a className="color-third fw-600">Buy Ticket</a></li>
+                                    <li className={isLogin ? "mr-lg-4 py-3 py-lg-0 myline-nav text-center nav-link hide-on-lg hide-on-xl" : "hide"}><Link to="/app/profil_page" className="color-third fw-600">Profile</Link></li>
+                                    <li className={isLogin ? "mr-lg-4 py-3 py-lg-0 myline-nav text-center nav-link hide-on-lg hide-on-xl" : "hide"}><Link to="/auth/signin" className="color-third fw-600" onClick={()=>{
+                                        dispatch({type:"LOGOUT"})
+                                        localStorage.removeItem("token")
+                                    }} >Logout</Link></li>
                                 </ul>
                                 <ul className="d-flex mb-0 justify-content-lg-between ml-lg-auto pl-0 py-3 py-lg-0 my-lg-0 px-auto px-lg-0 myline-nav nav-link">
                                     <li className="my-auto w-sm-100 text-sm-center text-lg-left cover mx-3">
@@ -120,9 +125,12 @@ function Navbar() {
                                         </div>
                                     </li>
                                 </ul>
-                                <div className="hide-on-lg hide-on-xl mx-auto my-5 position-relative w-100 px-5">
+                                {/* <div className="hide-on-lg hide-on-xl mx-auto my-5 position-relative w-100 px-5">
                                     <input type="text" className="myinput myrounded-1 pl-5" placeholder="Search..." />
                                     <img src={search} class="position-absolute nav_search_icon_position c-pointer" />
+                                </div> */}
+                                <div style={{minHeight:"120px"}}>
+
                                 </div>
                             </div>
                         </div>

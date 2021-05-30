@@ -22,12 +22,12 @@ export default function Home() {
             .then(res => {
                 setData(res.data.data)
             }
-            )
+        )
     }, [])
     return (
         <>
             <Navbar />
-            <div className="container pt-7">
+            <div className="container" style={{paddingTop:"8rem"}}>
                 <div className="row">
                     <div className="col-12 col-sm-12 col-md-6 col-lg-6 text-sm-center text-start d-flex align-self-center">
                         <div>

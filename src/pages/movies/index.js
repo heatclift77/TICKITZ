@@ -6,11 +6,11 @@ export default function Movies() {
     return (
         <div>
             <Navbar/>
-            <div className="container" style={{marginTop:"8rem"}}>
+            <div className="container" style={{paddingTop:"10rem"}}>
                 <h2 className="font-weight-bold">Semua Film</h2>
-                <div className="row my-5">
+                <div className="row my-4">
                     {data.map(movie=>{
-                        return <div className="col-6 col-md-4 col-xl-3">
+                        return <div className="col-6 col-md-3 col-xl-2">
                         <div className="p-3 rounded shadow">
                             <div className="d-flex justify-content-center rounded overflow-hidden">
                                 <img src={movie.image} className="w-100 align-self-center" />

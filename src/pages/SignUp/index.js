@@ -24,10 +24,11 @@ export class SignUp extends Component {
             Submit : (e) => {
                 const email = this.state.email
                 const pass = this.state.password
+                console.log(email,pass);
                 axios({
                     method: 'post',
                     headers: { 'content-type': 'application/json' },
-                    url: `${process.env.REACT_APP_SERVER}/user/register`,
+                    url: `${process.env.REACT_APP_SERVER}/v1/user/register`,
                     data: {
                         email: email,
                         pass: pass

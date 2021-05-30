@@ -782,5 +782,12 @@ h2 {
 .ReactModal__Overlay--before-close {
     opacity: 0;
 }
+.hover-reduce-opacity{
+    transition: all ease-in-out .3s;
+    cursor: pointer;
+}
+.hover-reduce-opacity:hover{
+    opacity: .6;
+}
 
 /* --------------------- */

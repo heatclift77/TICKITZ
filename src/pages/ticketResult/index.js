@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import lg from '../../asets/lg_tickitz.png'
 import {Navbar, Footer} from '../../components/templates'
 import axios from 'axios'
+import QRcode from 'qrcode.react'
+
 export default function TicketResult() {
     const { id } = useParams();
     const [tiket, setTiket] = useState([])
@@ -45,23 +47,23 @@ export default function TicketResult() {
             <div className="my-5" style={{ background: "#F5F6F8"}}>
                 <div style={{ marginTop: "5rem" }} className="container">
                     <div className="row">
-                        <div className="col-10 mx-auto myrounded-2 bg-white p-5 my-5">
+                        <div className="col-10 mx-auto myrounded-2 bg-white p-5 my-5 overflow-auto">
                             <h2 className="mb-4 text-center">Proof of Payment</h2>
-                            <div className="d-flex">
-                                <div className="py-3 px-5 d-flex justify-content-lg-between" style={{ background: "#5F2EEA", borderTopLeftRadius: "1rem", borderRight: "2px dashed #DEDEDE", width: "60%" }}>
+                            <div className="d-flex pr-5 pr-lg-0" style={{minWidth:"700px"}}>
+                                <div className="py-3 px-5 d-flex justify-content-lg-between" style={{ background: "#5F2EEA", borderTopLeftRadius: "1rem", borderRight: "2px dashed #DEDEDE", width: "70%" }}>
                                     <div style={{ width: "100px" }}>
                                         <img src={lg} className="w-100" />
                                     </div>
                                     <p className="m-0 align-self-center text-white">Admit One</p>
                                 </div>
-                                <div className="py-3 px-5 d-flex justify-content-center" style={{ background: "#5F2EEA", borderTopRightRadius: "1rem", borderLeft: "2px dashed #DEDEDE", width: "40%" }}>
+                                <div className="py-3 px-5 d-flex justify-content-center" style={{ background: "#5F2EEA", borderTopRightRadius: "1rem", borderLeft: "2px dashed #DEDEDE", width: "30%" }}>
                                     <div style={{ width: "100px" }}>
                                         <img src={lg} className="w-100" />
                                     </div>
                                 </div>
                             </div>
-                            <div className="d-flex">
-                                <div className="py-3 px-5 d-flex justify-content-lg-between" style={{ borderBottomLeftRadius: "1rem", borderRight: "2px dashed #DEDEDE", borderLeft: "2px solid #DEDEDE", borderBottom: "2px solid #DEDEDE", width: "60%" }}>
+                            <div className="d-flex pr-5 pr-lg-0" style={{minWidth:"700px"}}>
+                                <div className="py-3 px-5 d-flex justify-content-lg-between" style={{ borderBottomLeftRadius: "1rem", borderRight: "2px dashed #DEDEDE", borderLeft: "2px solid #DEDEDE", borderBottom: "2px solid #DEDEDE", width: "70%" }}>
                                     <div className="row">
                                         <div className="col-12">
                                             <div>
@@ -69,37 +71,37 @@ export default function TicketResult() {
                                                 <p className="font-weight-bold">{tiket.movie}</p>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-lg-4">
+                                        <div className="col-12 col-sm-4">
                                             <div>
                                                 <label style={{ color: "#DEDEDE" }}>tgl</label>
                                                 <p className="font-weight-bold">{tiket.tanggal}</p>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-lg-4">
+                                        <div className="col-12  col-sm-4">
                                             <div>
                                                 <label style={{ color: "#DEDEDE" }}>jam tayang</label>
                                                 <p className="font-weight-bold">{tiket.jam_tayang}</p>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-lg-4">
+                                        <div className="col-12 col-sm-4">
                                             <div>
                                                 <label style={{ color: "#DEDEDE" }}>kategori</label>
                                                 <p className="font-weight-bold">action, advanture</p>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-lg-4">
+                                        <div className="col-12 col-sm-4">
                                             <div>
                                                 <label style={{ color: "#DEDEDE" }}>jumlah ticket</label>
                                                 <p className="font-weight-bold">{tiket.jumlah_tiket} Pcs</p>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-lg-4">
+                                        <div className="col-12 col-sm-4">
                                             <div>
                                                 <label style={{ color: "#DEDEDE" }}>kursi</label>
                                                 <p className="font-weight-bold">{tiket.kursi}</p>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-lg-4">
+                                        <div className="col-12 col-sm-4">
                                             <div>
                                                 <label style={{ color: "#DEDEDE" }}>Price</label>
                                                 <p className="font-weight-bold">Rp { formatRbuan(tiket.harga)}</p>
@@ -107,9 +109,11 @@ export default function TicketResult() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="py-3 px-5 d-flex justify-content-center" style={{ borderBottomRightRadius: "1rem", borderRight: "2px solid #DEDEDE", borderLeft: "2px dashed #DEDEDE", borderBottom: "2px solid #DEDEDE", width: "40%" }}>
-                                    <div style={{ width: "100px" }}>
-                                        <img src={lg} className="w-100" />
+                                <div className="py-3 px-5 d-flex justify-content-center" style={{ borderBottomRightRadius: "1rem", borderRight: "2px solid #DEDEDE", borderLeft: "2px dashed #DEDEDE", borderBottom: "2px solid #DEDEDE", width: "30%" }}>
+                                    <div className="d-flex justify-content-center">
+                                        <div className="align-self-center">
+                                            <QRcode value={tiket.id_tiket}/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

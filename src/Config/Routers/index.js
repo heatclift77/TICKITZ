@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import { useDispatch } from 'react-redux'
 import { SignIn, SignUp, Home, ProfilPage, MovieDetails, 
     Payment ,OrderPage, ForgotPass, ConfirmNewPass, Admin, 
-    TicketResult, NotFoundPage, Movies, ChangeFilm} from '../../pages';
-import {Navbar, Footer} from '../../components/templates'
+    TicketResult, NotFoundPage, Movies, ChangeFilm, EditMovie} from '../../pages';
 import PrivateRoute from '../module/profilPage'
 import AdminRoute from '../module/admin'
 import AuthRoute from '../module/authRoute'
@@ -87,6 +86,10 @@ const Routers = () => {
                 <PrivateRoute path='/app/user/ticket/:id' component={(props)=><TicketResult {...props}/>} />
                 {/* <AdminRoute path='/app/Add_Product' component={(props)=><Admin {...props} />} /> */}
                 <Route path='/app/ListTayang/:code' component={MovieDetails} />
+                <Route path='/app/admin/movieDetails/:id' component={EditMovie} />
+                <Route path='/'>
+                    <Admin />
+                </Route>
                 <Route path='/'>
                     <Home />
                 </Route>

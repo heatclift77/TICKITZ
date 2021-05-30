@@ -45,7 +45,7 @@ function Payment() {
                 data : detail_pesanan
             })
             .then(res =>{
-                swal("success", "transaksi berhasil", "error")
+                swal("success", "transaksi berhasil", "success")
                 history.push(`/app/user/ticket/${res.data.data.id_tiket}`)
             })
             .catch(err => {

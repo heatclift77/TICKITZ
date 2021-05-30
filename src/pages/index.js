@@ -12,5 +12,6 @@ import TicketResult from './ticketResult'
 import NotFoundPage from './404Page'
 import Movies from './movies'
 import ChangeFilm from './changeFilm'
+import EditMovie from './adminEditMovie'
 
-export {SignUp, SignIn, Home, ProfilPage, MovieDetails, Payment, OrderPage, ForgotPass, ConfirmNewPass, Admin, TicketResult, NotFoundPage, Movies, ChangeFilm};
+export {SignUp, SignIn, Home, ProfilPage, MovieDetails, Payment, OrderPage, ForgotPass, ConfirmNewPass, Admin, TicketResult, NotFoundPage, Movies, ChangeFilm, EditMovie};
