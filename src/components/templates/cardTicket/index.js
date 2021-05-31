@@ -42,7 +42,7 @@ function CardTicket() {
                                         <button className="mybtn mybtn-active w-100 myrounded-1">book now</button>
                                     </div>
                                     <div className="col-6 col-md-12 col-lg-6 justify-content-center align-self-center text-center my-md-3 my-lg-0">
-                                        <a class="color-primary font-weight-bold px-4 px-sm-4 px-md-0 px-lg-0">add to chart</a>
+                                        <span class="color-primary font-weight-bold px-4 px-sm-4 px-md-0 px-lg-0">add to chart</span>
                                     </div>
                                 </div>
                             </div>

@@ -4,9 +4,6 @@ import {TabButton} from '../../atoms'
 function FormControll({sendState}) {
     const [first, setFirst] = useState(true)
     const [second, setSecond] = useState(false)
-    function sendState(state){
-        return state
-    }
     function dynamicClass (state){
         if(state){
             return "border-bottom-primary m-0 py-3 mx-3 c-pointer"

@@ -2,7 +2,7 @@ import React from 'react'
 import {Navbar, Footer} from '../../components/templates'
 import {useSelector} from 'react-redux'
 export default function Movies() {
-    const {data, loading} = useSelector(state=>state.movie)
+    const {data} = useSelector(state=>state.movie)
     return (
         <div>
             <Navbar/>
@@ -13,7 +13,7 @@ export default function Movies() {
                         return <div className="col-6 col-md-3 col-xl-2">
                         <div className="p-3 rounded shadow">
                             <div className="d-flex justify-content-center rounded overflow-hidden">
-                                <img src={movie.image} className="w-100 align-self-center" />
+                                <img src={movie.image} className="w-100 align-self-center" alt="film" />
                             </div>
                             <p className="font-weight-bold text-center my-3">{movie.title}</p>
                             <button className="button-details w-100" style={{textAlign:"center !important"}}>details</button>

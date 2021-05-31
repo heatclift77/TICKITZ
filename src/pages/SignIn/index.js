@@ -6,9 +6,7 @@ import logo from '../../asets/lg_tickitz.png';
 import hero from '../../asets/image_1.jpg';
 import axios from 'axios';
 // add on
-import { Input as MyInput, InputTypePass, Button as MyButton,
-    GoogleButton, FbButton} from '../../components/atoms';
-import swal from 'sweetalert';
+import { Input as MyInput, InputTypePass, Button as MyButton} from '../../components/atoms';
 
 const SignIn = () => {
     const dispatch = useDispatch();
@@ -23,13 +21,13 @@ const SignIn = () => {
     
     function handleEmailChange(e){
         setEmail(e.target.value)
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             setInputStyle('my-input rounded w-100 py-3 px-3 border-danger')
             setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none') /**button mati */
             setButtonStatus(false)
         }else{
             setInputStyle('my-input rounded w-100 py-3 px-3')
-            if(pass.length == 0){
+            if(pass.length === 0){
                 setInputPassStyle('my-input rounded w-100 py-3 px-3 border-danger')
             }else{
                 setButtonStyle('my-btn py-3 px-4 w-100 rounded') /**button hidup */
@@ -39,13 +37,13 @@ const SignIn = () => {
     }
     function handlePassChange(e){
         setPass(e.target.value)
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             setInputPassStyle('my-input rounded w-100 py-3 px-3 border-danger')
             setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none') /**button mati */
             setButtonStatus(false)
         }else{
             setInputPassStyle('my-input rounded w-100 py-3 px-3')
-            if(email.length == 0){
+            if(email.length === 0){
                 setInputStyle('my-input rounded w-100 py-3 px-3 border-danger') 
             }else{
                 setButtonStyle('my-btn py-3 px-4 w-100 rounded') /**button hidup */
@@ -84,7 +82,8 @@ const SignIn = () => {
             localStorage.setItem('token', response.data.token)
             history.push('/app/home')
         }).catch(err => {
-            swal('Oops', err.response.data.message, 'error')
+            // swal('Oops', err.response.data.message, 'error')
+            console.log(err);
         })
     }
     if(isLogin){
@@ -99,11 +98,11 @@ const SignIn = () => {
                         <div className="row position-relative">
                             <div class="col-11 mx-auto text-white">
                                 <div className="position-absolute top-0 left-0">
-                                    < img src={hero} className='hero-size' />
+                                    < img src={hero} className='hero-size' alt="hero" />
                                     <div className="laminasi"></div>
                                 </div>
                                 <div className="center-absolute text-center">
-                                    <img src={logo} className="my-4" />
+                                    <img src={logo} className="my-4" alt="tickitz" />
                                     <div>
                                         <h3>Wait, Watch, WOW!</h3>
                                     </div>

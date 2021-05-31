@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import {useDispatch} from 'react-redux'
+import React from 'react'
 import InputDate from '../../organism/inputDate'
 import Input from '../../atoms/input'
 import Movies from '../../atoms/movies'

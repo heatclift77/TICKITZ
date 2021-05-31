@@ -16,13 +16,13 @@ function ConfirmNewPass() {
     const [buttonStyle, setButtonStyle] = useState('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none')
     function handleChangeNewPass (e){
         setNewPass(e.target.value)
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             setNewPassStyle('my-input rounded w-100 py-3 px-3 border-danger')
             setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none')
             setButtonStatus(false)
         }else{  
             setNewPassStyle('my-input rounded w-100 py-3 px-3')
-            if(confirmPass == e.target.value){
+            if(confirmPass === e.target.value){
                 setConfirmPassStyle('my-input rounded w-100 py-3 px-3')
                 setButtonStyle('my-btn py-3 px-4 w-100 rounded')
                 setButtonStatus(true)
@@ -71,11 +71,11 @@ function ConfirmNewPass() {
                         <div className="row position-relative">
                             <div class="col-11 mx-auto text-white">
                                 <div className="position-absolute top-0 left-0">
-                                    < img src={hero} className='hero-size' />
+                                    < img src={hero} className='hero-size' alt="hero" />
                                     <div className="laminasi"></div>
                                 </div>
                                 <div className="position-absolute ml-5 mt-5 pl-5">
-                                    <img src={logo} className="my-5" />
+                                    <img src={logo} className="my-5" alt="tickitz" />
                                     <div>
                                         <h1>Lets reset your password</h1>
                                         <p className='fw-400 fs-12'>To be able to use your account again, please

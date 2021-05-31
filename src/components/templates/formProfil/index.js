@@ -1,8 +1,6 @@
 import {React, Fragment, useState} from 'react';
-import { useSelector } from 'react-redux'
 import {TabButton} from '../../atoms';
 import {AcountProfil, OrderHistory} from '../../organism';
-import axios from 'axios';
 
 function FormProfil() {
     const [AcountSetting, setFirst] = useState(true);

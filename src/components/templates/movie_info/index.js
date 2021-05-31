@@ -20,7 +20,7 @@ function MovieInfo({image, title, genre, price, release_date, directed_by, durat
             <section className="row py-5 border-bottom-sm">
                 <div className="col-12 col-sm-12 col-md-4 col-lg-3 my-5 my-md-0 mx-auto">
                     <div className="col-8 col-sm-8 col-md-12 mx-auto p-4 myrounded-2 shadow">
-                        <img src={image} className="w-100" />
+                        <img src={image} className="w-100" alt="/" />
                     </div>
                 </div>
                 <div className="col-12 col-sm-12 col-md-8 col-lg-9 my-lg-3 px-md-4">

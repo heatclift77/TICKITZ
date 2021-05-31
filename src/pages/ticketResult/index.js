@@ -18,7 +18,7 @@ export default function TicketResult() {
         })
     },[id])
     const formatRbuan = (value) => {
-        if(value == undefined){
+        if(value === undefined){
             return 0
         }else{
             const sisa = value.toString().length % 3
@@ -31,7 +31,7 @@ export default function TicketResult() {
             return rupiah
         }
     }
-    if(tiket.length == 0){
+    if(tiket.length === 0){
         return (
             <div className="container" style={{minHeight:"100vh", width:"100vw", position:"relative"}}>
             <div className="position-absolute" style={{top:"50%", left:"50%", transform:"translate(-50%, -50%)"}}>
@@ -52,13 +52,13 @@ export default function TicketResult() {
                             <div className="d-flex pr-5 pr-lg-0" style={{minWidth:"700px"}}>
                                 <div className="py-3 px-5 d-flex justify-content-lg-between" style={{ background: "#5F2EEA", borderTopLeftRadius: "1rem", borderRight: "2px dashed #DEDEDE", width: "70%" }}>
                                     <div style={{ width: "100px" }}>
-                                        <img src={lg} className="w-100" />
+                                        <img src={lg} className="w-100" alt="tickitz" />
                                     </div>
                                     <p className="m-0 align-self-center text-white">Admit One</p>
                                 </div>
                                 <div className="py-3 px-5 d-flex justify-content-center" style={{ background: "#5F2EEA", borderTopRightRadius: "1rem", borderLeft: "2px dashed #DEDEDE", width: "30%" }}>
                                     <div style={{ width: "100px" }}>
-                                        <img src={lg} className="w-100" />
+                                        <img src={lg} className="w-100" alt="tickitz" />
                                     </div>
                                 </div>
                             </div>

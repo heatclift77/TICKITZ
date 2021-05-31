@@ -1,8 +1,7 @@
 import { React, useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Navbar, Footer, MovieInfo } from '../../components/templates'
-import { Dropdown, InputDate } from '../../components/organism'
 import axios from 'axios'
 import swal from "sweetalert"
 function MovieDetails() {
@@ -10,17 +9,15 @@ function MovieDetails() {
     const limit = 3
     // 
     const { user } = useSelector(state => state.user)
-    const dispatch = useDispatch()
     const history = useHistory()
     const [movie, setMovie] = useState({})
     const [cinema, setCinema] = useState([])
     const { code } = useParams();
-    const [dateValue, setDateValue] = useState('Set Date')
     const [cinemaSelected, setCinemaSelected] = useState("")
     const [jamTayang, setJamTayang] = useState("")
     const [page, setPage] = useState([])
     const [paginationSelected, setPaginationSelected] = useState(1)
-    const [dropdown, setDropdown] = useState({
+    const [dropdown] = useState({
         value: "",
         list: ["ALL","JAKARTA", "SEMARANG", "SURABAYA", "BALI"]
     })
@@ -33,6 +30,7 @@ function MovieDetails() {
             .catch(err => {
                 console.log(err.response);
             })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [code])
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_SERVER}/v1/movie/details?id=${code}`)
@@ -40,20 +38,11 @@ function MovieDetails() {
                 setMovie(res.data.data[0])
             })
             .catch(err => {
-                if (err.message == 'Request failed with status code 404') {
+                if (err.message === 'Request failed with status code 404') {
                 }
             })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    const formatRbuan = (value) => {
-        const sisa = value.length % 3
-        let rupiah = value.substr(0, sisa)
-        const ribuan = value.substr(sisa).match(/\d{3}/g);
-        if (ribuan) {
-            const separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
-        return rupiah
-    }
     return (
         <>
             <Navbar />
@@ -106,7 +95,7 @@ function MovieDetails() {
                                                 <div className="row">
                                                     <div className="col-12 col-md-12 col-lg-6 mt-lg-3 my-auto">
                                                         <div className="align-self-center hide-on-sm hide-on-md">
-                                                            <img src={item.img} className='w-100' />
+                                                            <img src={item.img} className='w-100' alt="cinema" />
                                                         </div>
                                                     </div>
                                                     <div className="col-12 col-md-12 col-lg-6">
@@ -123,7 +112,7 @@ function MovieDetails() {
                                                     setJamTayang(jam)
                                                 }
                                                 } >
-                                                    <p className={cinemaSelected == indexCard && jamTayang == jam ? "mybg-primary text-white text-center py-1 rounded" : "mygray-color text-center hover-color-primary py-1"} style={{ fontSize: "14px" }}>{jam}</p>
+                                                    <p className={cinemaSelected === indexCard && jamTayang === jam ? "mybg-primary text-white text-center py-1 rounded" : "mygray-color text-center hover-color-primary py-1"} style={{ fontSize: "14px" }}>{jam}</p>
                                                 </div>
                                             })}
                                         </div>
@@ -132,7 +121,7 @@ function MovieDetails() {
                                                 <div className="row">
                                                     <div className="col-12 col-md-12 col-lg-12 col-xl-6 mb-3 ml-auto">
                                                         <button className="mybtn mybtn-active w-100 myrounded-1" onClick={(e) => {
-                                                            if (cinemaSelected == indexCard) {
+                                                            if (cinemaSelected === indexCard) {
                                                                 const data = {
                                                                     id_movie: code,
                                                                     id_user: user.id_user,

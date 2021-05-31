@@ -1,8 +1,8 @@
-import {React, useState} from 'react'
+import {React} from 'react'
 import {Movies} from '../../atoms'
 import style from './style.module.css'
 
-function CardMovie2({img, title, genre, id_movie, onClick, openModal}) {
+function CardMovie2({img, title, genre, onClick, openModal}) {
     return (
         <div>
             <div className="p-4 myrounded-1 border c-pointer hover-shadow mr-3 bg-white text-center hover-show-details position-relative">

@@ -11,9 +11,10 @@ export default function EditMovie() {
                 setMovie(res.data.data[0])
             })
             .catch(err => {
-                if (err.message == 'Request failed with status code 404') {
+                if (err.message === 'Request failed with status code 404') {
                 }
             })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     console.log(movie);
     return (
@@ -24,7 +25,7 @@ export default function EditMovie() {
                 <div className="row bg-white rounded">
                     <div className="col-3">
                         <div className="rounded overflow-hidden">
-                            <img src={movie.image} className="w-100" />
+                            <img src={movie.image} className="w-100" alt="/" />
                         </div>
                     </div>
                     <div className="col-8">

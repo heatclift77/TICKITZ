@@ -1,6 +1,4 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import React from 'react'
 import { UserCard, FormProfil, Footer, Navbar } from '../../components/templates'
 
 function ProfilPage() {

@@ -105,44 +105,44 @@ function Payment() {
                             <div className="row bg-white myrounded-2 py-4">
                                 <div className="col-12 py-3 px-4 relative">
                                     <div className="row">
-                                        <div className={(btnpayment.index == 1) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'google pay', index: 1 }) }}>
+                                        <div className={(btnpayment.index === 1) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'google pay', index: 1 }) }}>
                                             <div className="d-flex justify-content-center align-self-center border myrounded-1 py-2">
-                                                <img src={gplay} />
+                                                <img src={gplay} alt="google play" />
                                             </div>
                                         </div>
-                                        <div className={(btnpayment.index == 2) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'visa', index: 2 }) }}>
+                                        <div className={(btnpayment.index === 2) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'visa', index: 2 }) }}>
                                             <div className="d-flex justify-content-center align-self-center border myrounded-1 py-2">
-                                                <img src={visa} />
+                                                <img src={visa} alt="visa"  />
                                             </div>
                                         </div>
-                                        <div className={(btnpayment.index == 3) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'gopay', index: 3 }) }}>
+                                        <div className={(btnpayment.index === 3) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'gopay', index: 3 }) }}>
                                             <div className="d-flex justify-content-center align-self-center border myrounded-1 py-2">
-                                                <img src={gopay} />
+                                                <img src={gopay} alt="gopay" />
                                             </div>
                                         </div>
-                                        <div className={(btnpayment.index == 4) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'paypal', index: 4 }) }}>
+                                        <div className={(btnpayment.index === 4) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'paypal', index: 4 }) }}>
                                             <div className="d-flex justify-content-center align-self-center border myrounded-1 py-2">
-                                                <img src={paypal} />
+                                                <img src={paypal} alt="paypal" />
                                             </div>
                                         </div>
-                                        <div className={(btnpayment.index == 5) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'dana', index: 5 }) }}>
+                                        <div className={(btnpayment.index === 5) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'dana', index: 5 }) }}>
                                             <div className="d-flex justify-content-center align-self-center border myrounded-1 py-2">
-                                                <img src={dana} />
+                                                <img src={dana} alt="dana" />
                                             </div>
                                         </div>
-                                        <div className={(btnpayment.index == 6) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'bca', index: 6 }) }}>
+                                        <div className={(btnpayment.index === 6) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'bca', index: 6 }) }}>
                                             <div className="d-flex justify-content-center align-self-center border myrounded-1 py-2">
-                                                <img src={bca} />
+                                                <img src={bca} alt="bca" />
                                             </div>
                                         </div>
-                                        <div className={(btnpayment.index == 7) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'bri', index: 7 }) }}>
+                                        <div className={(btnpayment.index === 7) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'bri', index: 7 }) }}>
                                             <div className="d-flex justify-content-center align-self-center border myrounded-1 py-2">
-                                                <img src={bri} />
+                                                <img src={bri} alt="bri" />
                                             </div>
                                         </div>
-                                        <div className={(btnpayment.index == 8) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'ovo', index: 8 }) }}>
+                                        <div className={(btnpayment.index === 8) ? "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn-active" : "col-4 col-sm-4 col-lg-3 my-2 c-pointer payment-btn"} onClick={() => { setBtnPayment({ paymentSelected: 'ovo', index: 8 }) }}>
                                             <div className="d-flex justify-content-center align-self-center border myrounded-1 py-2">
-                                                <img src={ovo} />
+                                                <img src={ovo} alt="ovo" />
                                             </div>
                                         </div>
                                     </div>
@@ -197,6 +197,7 @@ function Payment() {
                     </div>
                 </section>
             </main>
+            <Footer />
         </>
 
     )

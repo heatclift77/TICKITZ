@@ -21,7 +21,7 @@ export class SignUp extends Component {
             passDanger : 'my-input rounded w-100 py-3 px-3',
             button : 'py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none',
             btnStatus : false,
-            Submit : (e) => {
+            Submit : () => {
                 const email = this.state.email
                 const pass = this.state.password
                 console.log(email,pass);
@@ -34,10 +34,10 @@ export class SignUp extends Component {
                         pass: pass
                     }
                 })
-                .then(res=> {
+                .then(() => {
                     swal("success", "pendaftaran Berhasil, silahkan cek email anda", "success")
                 })
-                .catch(err=> {
+                .catch(() => {
                     this.setState({messageDanger : 'text-danger m-0 py-2'});
                 })
             },
@@ -50,14 +50,14 @@ export class SignUp extends Component {
             emailDanger : 'my-input rounded w-100 py-3 px-3',
             messageDanger : 'hide'
         })
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             this.setState({
                 emailDanger : 'my-input rounded w-100 py-3 px-3 border-danger',
                 button : "py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none",
                 btnStatus : false
             })
         }else{
-            if(this.state.checked && this.state.password.length != 0){
+            if(this.state.checked && this.state.password.length !== 0){
                 this.setState({
                     button : "my-btn py-3 px-4 w-100 rounded",
                     btnStatus : true
@@ -70,14 +70,14 @@ export class SignUp extends Component {
             password : e.target.value,
             passDanger : 'my-input rounded w-100 py-3 px-3' 
         })
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             this.setState({
                 passDanger : 'my-input rounded w-100 py-3 px-3 border-danger',
                 button : "py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none",
                 btnStatus : false
             })
         }else{
-            if(this.state.checked && this.state.email.length != 0){
+            if(this.state.checked && this.state.email.length !== 0){
                 this.setState({
                     button : "my-btn py-3 px-4 w-100 rounded",
                     btnStatus : true
@@ -85,7 +85,7 @@ export class SignUp extends Component {
             }
         }
     }
-    handleCheck = (e) =>{
+    handleCheck = () =>{
         if(this.state.checked){
             this.setState({
                 checked : false,
@@ -94,16 +94,16 @@ export class SignUp extends Component {
             })
         }else{
             this.setState({checked : true})
-            if(this.state.email.length == 0 && this.state.password.length == 0){
+            if(this.state.email.length === 0 && this.state.password.length === 0){
                 this.setState({
                     emailDanger : 'my-input rounded w-100 py-3 px-3 border-danger',
                     passDanger : 'my-input rounded w-100 py-3 px-3 border-danger'
                 })
             }else{
-                if(this.state.email.length == 0){
+                if(this.state.email.length === 0){
                     this.setState({emailDanger : 'my-input rounded w-100 py-3 px-3 border-danger'})
                 }else{
-                    if(this.state.password == 0){
+                    if(this.state.password === 0){
                         this.setState({passDanger : 'my-input rounded w-100 py-3 px-3 border-danger'})
                     }else{
                         this.setState({
@@ -115,11 +115,6 @@ export class SignUp extends Component {
             }
         }
     }
-    componentDidMount = ()=>{
-        const mapStateToProps = state => ({
-            status: state.user.isLogin
-        });
-    }
     render() {
         return (
             <div class="container-fluid">
@@ -128,11 +123,11 @@ export class SignUp extends Component {
                         <div className="row position-relative">
                             <div class="col-11 mx-auto text-white">
                                 <div className="position-absolute top-0 left-0">
-                                    < img src={hero} className='hero-size' />
+                                    < img src={hero} className='hero-size' alt="hero" />
                                     <div className="laminasi"></div>
                                 </div>
                                 <div className="position-absolute ml-5 mt-5 pl-5">
-                                    <img src={logo} className="my-5" />
+                                    <img src={logo} className="my-5" alt="tickitz" />
                                     <div>
                                         <h1>Lets build your account</h1>
                                         <p>To be a loyal moviegoer and access all of features, your details are required.</p>
@@ -163,11 +158,11 @@ export class SignUp extends Component {
                                 <p className={this.state.messageDanger}>Email Sudah Terdaftar !!!</p>
                                 <InputTypePass label="password" className={this.state.passDanger} placeholder="Write Your Password" onChange={this.handlePassChange} />
                                 <div className="d-flex my-4">
-                                    <input type="checkbox" className="bg-black mr-2" className="my-auto mr-3" checked={this.state.checked} onClick={this.handleCheck} />
+                                    <input type="checkbox" className="bg-black my-auto mr-2" checked={this.state.checked} onClick={this.handleCheck} />
                                     <p className='my-auto'>I agree to terms & conditions</p>
                                 </div>
                                 <MyButton status='false' value="Join for free now" className={this.state.button} onClick={
-                                    ()=> (this.state.btnStatus) ? this.state.Submit() : function(){}
+                                    ()=> this.state.btnStatus ? this.state.Submit() : function(){}
                                     } />
                                 <p className="text-center py-4">Do you already have an account ? <Link to="SignIn">Log in</Link></p>
                                 <div className="d-flex justify-content-center">

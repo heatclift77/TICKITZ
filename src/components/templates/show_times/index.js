@@ -1,8 +1,7 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState} from 'react'
 import Modal from 'react-modal'
 import { InputDate, Schedule } from '../../organism'
 import style from './showTimes.module.css'
-import swal from 'sweetalert'
 
 function ShowTimes() {
     const [data, setData] = useState({
@@ -12,13 +11,10 @@ function ShowTimes() {
     const [dangerMessage, setDangerMessage] = useState('')
     const [toggleModal, setToggleModal] = useState(false)
     let [dataSchedule, setSchedule] = useState([])
-    useEffect(()=>{
-
-    },dataSchedule)
     function handleAddSchedule(e){
         let timeFormat = ''
-        if(data.hours > 24 || data.minutes >= 60 || data.hours == 0 || data.minutes == 0
-            || data.hours == undefined || data.minutes == undefined){
+        if(data.hours > 24 || data.minutes >= 60 || data.hours === 0 || data.minutes === 0
+            || data.hours === undefined || data.minutes === undefined){
             return setDangerMessage('format salah !!!')
         }else{
             // hours input cek

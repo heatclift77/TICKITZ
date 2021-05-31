@@ -13,14 +13,14 @@ function InputDate({value, ...rest}) {
                 <div className="d-flex justify-content-between p-3">
                     <div className='d-flex'>
                         <div className='mr-2'>
-                            <img src={calender} />
+                            <img src={calender} alt="/" />
                         </div>
                         <div className='mx-2'>
                             <p className='m-0'>{value}</p>
                         </div>
                     </div>
                     <div>
-                        <img src={caret_down} />
+                        <img src={caret_down} alt="/" />
                     </div>
                 </div>
             </div>

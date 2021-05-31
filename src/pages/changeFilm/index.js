@@ -21,7 +21,7 @@ export default function ChangeFilm() {
                 <div className="row">
                     <div className="col-12-col-md-6 my-5">
                         <div className="" style={{minWidth:"400px"}}>
-                            <img src={data_pesanan.cinema_logo} className="w-100" alt="" />
+                            <img src={data_pesanan.cinema_logo} className="w-100" alt="/" />
                         </div>
                         <p>{data_pesanan.alamat_cinema}</p>
                     </div>
@@ -31,7 +31,7 @@ export default function ChangeFilm() {
                         return  <div className="col-6 col-md-4 col-lg-3 my-3">
                             <div className="rounded p-3 bg-white shadow">
                                 <div className="d-flex justify-content-center rounded overflow-auto">
-                                    <img src={item.image} className="w-100" />
+                                    <img src={item.image} className="w-100" alt="/" />
                                 </div>
                                 <p className="font-weight-bold text-center my-3">{item.title}</p>
                                 <button className="mybtn mybtn-active rounded fs-08 fw-600 mt-3 w-100" onClick={()=>{

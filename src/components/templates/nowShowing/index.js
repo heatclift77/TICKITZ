@@ -17,13 +17,13 @@ function NowShowing() {
     <div className="mt-7 nowShowingHeight">
         <div class="col-12 d-flex justify-content-between">
             <h5 class="font-weight-bold">Now Showing</h5>
-            <a href="#" class="color-primary">view all</a>
+            <span class="color-primary">view all</span>
         </div>
         <div className="d-flex overflow-auto py-5">
                 {data.map(mov=>{
-                    if(mov.status == '1'){
+                    if(mov.status === '1'){
                         return<CardMovie2 title={mov.title} genre={mov.genre} img={mov.image} id_movie={mov.id_movie} onClick={
-                            (e)=>{
+                            ()=>{
                                 history.push(`/app/ListTayang/${mov.code_ticket}`)
                             }
                         } />

@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {useSelector} from 'react-redux'
 import {Dropdown} from '../../organism'
-import axios from 'axios'
 
 function PremierLocation() {
     const cinema = useSelector(state=>state.cinema)
@@ -13,7 +12,7 @@ function PremierLocation() {
                     {cinema.data.map(data=>{
                         return  <div className="col-4">
                         <div className='c-pointer py-3 px-4 w-100 btn-img rounded'>
-                            <img src={data.img} className='w-100' />
+                            <img src={data.img} className='w-100' alt="/" />
                         </div>
                     </div>
                     })}

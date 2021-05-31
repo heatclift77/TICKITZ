@@ -14,7 +14,7 @@ function ForgotPass() {
     const [buttonStyle, setButtonStyle] = useState('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none')
     function handleChange (e){
         setEmail(e.target.value)
-        if(e.target.value.length == 0){
+        if(e.target.value.length === 0){
             setInputStyle('my-input rounded w-100 py-3 px-3 border-danger')
             setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none')
             setButtonStatus(false)
@@ -37,9 +37,9 @@ function ForgotPass() {
             history.push('/ConfirmNewPass');
         })
         .catch(err =>{
-            if(err.message == 'Network Error'){
+            if(err.message === 'Network Error'){
                 swal('error', 'Sepertinya Server Bermasalah' ,'error');
-            }else if(err.response.data.status == 400){
+            }else if(err.response.data.status === 400){
                 swal('error', err.response.data.message ,'error');
             }
         })
@@ -52,11 +52,11 @@ function ForgotPass() {
                         <div className="row position-relative">
                             <div class="col-11 mx-auto text-white">
                                 <div className="position-absolute top-0 left-0">
-                                    < img src={hero} className='hero-size' />
+                                    < img src={hero} className='hero-size' alt="hero" />
                                     <div className="laminasi"></div>
                                 </div>
                                 <div className="position-absolute ml-5 mt-5 pl-5">
-                                    <img src={logo} className="my-5" />
+                                    <img src={logo} className="my-5" alt="tickitz" />
                                     <div>
                                         <h1>Lets reset your password</h1>
                                         <p className='fw-400 fs-12'>To be able to use your account again, please

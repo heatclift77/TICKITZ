@@ -1,6 +1,5 @@
 import React from 'react'
 import {Movies} from '../../atoms'
-import {Link} from 'react-router-dom'
 
 function CardMovie({img, title, genre, onClick}) {
     return (

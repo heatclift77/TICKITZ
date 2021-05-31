@@ -12,7 +12,7 @@ function OrderHistoryCard(props) {
                             <p className="mygray-color fs-08">{tgl}</p>
                             <h5 className="fw-600">{title}</h5>
                         </div>
-                        <img src={dummyImage} />
+                        <img src={dummyImage} alt="/" />
                     </div>
                 </div>
             </div>

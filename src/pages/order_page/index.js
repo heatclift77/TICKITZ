@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import swal from 'sweetalert'
 import { Navbar, Footer } from '../../components/templates'
@@ -7,16 +6,7 @@ import { Navbar, Footer } from '../../components/templates'
 function OrderPage() {
     const  data  = JSON.parse(localStorage.getItem("_DATA_PESANAN"))
     const history = useHistory()
-    const dispatch = useDispatch()
     const [choosedSeat, setChoosedSeat] = useState([])
-    const [seat, setSeat] = useState({
-        value : '-',
-        seatCount : 0,
-        style : {
-            active : 'seat-box mybg-primary',
-            inActive : 'seat-box' 
-        }
-    })
     const formatRbuan = (value) => {
         const sisa = value.toString().length % 3
         let rupiah = value.toString().substr(0, sisa)
@@ -39,16 +29,13 @@ function OrderPage() {
     }
     const now = () => {
         const date = new Date()
-        const hari = date.getDay()
         const tgl = date.getDate()
         const bulan = date.getMonth()
         const tahun = date.getFullYear()
-        const namaHari = ["Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu","Minggu"]
-        const namaBulan = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul", "Agu","Sept","Okt","Nov","Des"]
-        // return `${namaHari[hari]}, ${tgl} ${namaBulan[bulan]} ${tahun}`
         return `${tgl}/${bulan}/${tahun}`
     }
     return (
+        <>
         <div className="mybg-second">
             <Navbar />
             <main className="container mt-7">
@@ -63,8 +50,8 @@ function OrderPage() {
                                             <h4 className="fw-600 m-0">{data.movie}</h4>
                                         </div>
                                         <div className="p-3 bg-light myrounded-2 cover" onClick={()=>{history.push("/app/changeFilm")}}>
-                                            <a className="m-0 font-weight-bold color-primary" onClick={()=>{ 
-                                            }} >ganti Film</a>
+                                            <p className="m-0 font-weight-bold color-primary" onClick={()=>{ 
+                                            }} >ganti Film</p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,14 +74,14 @@ function OrderPage() {
                                                             return ""
                                                         }else{
                                                             return <div className="col-2 p-1">
-                                                            <button disabled={item == "SOLD OUT" ? true : false} className={item === "SOLD OUT" ?  "seat-box-passive border-0" : choosedSeat.indexOf(item) === -1 ? "seat-box border-0" :  "seat-box seat-box-active border-0"} style={{fontSize:"8px", }} onClick={()=>{
-                                                            if(choosedSeat.indexOf(item) == -1){
+                                                            <button disabled={item === "SOLD OUT" ? true : false} className={item === "SOLD OUT" ?  "seat-box-passive border-0" : choosedSeat.indexOf(item) === -1 ? "seat-box border-0" :  "seat-box seat-box-active border-0"} style={{fontSize:"8px", }} onClick={()=>{
+                                                            if(choosedSeat.indexOf(item) === -1){
                                                                 setChoosedSeat([...choosedSeat, item])
                                                             }else{
                                                                 removeA(choosedSeat, item)
                                                                 setChoosedSeat([...choosedSeat])
                                                             }
-                                                        }} >{item == "SOLD OUT" ? "" : item}</button>
+                                                        }} >{item === "SOLD OUT" ? "" : item}</button>
                                                         </div>
                                                         }
                                                     })}
@@ -107,14 +94,14 @@ function OrderPage() {
                                                             return ""
                                                         }else{
                                                             return <div className="col-2 p-1">
-                                                            <button disabled={item == "SOLD OUT" ? true : false} className={item === "SOLD OUT" ?  "seat-box-passive border-0" : choosedSeat.indexOf(item) === -1 ? "seat-box border-0" :  "seat-box seat-box-active border-0"} style={{fontSize:"8px", }} onClick={()=>{
-                                                            if(choosedSeat.indexOf(item) == -1){
+                                                            <button disabled={item === "SOLD OUT" ? true : false} className={item === "SOLD OUT" ?  "seat-box-passive border-0" : choosedSeat.indexOf(item) === -1 ? "seat-box border-0" :  "seat-box seat-box-active border-0"} style={{fontSize:"8px", }} onClick={()=>{
+                                                            if(choosedSeat.indexOf(item) === -1){
                                                                 setChoosedSeat([...choosedSeat, item])
                                                             }else{
                                                                 removeA(choosedSeat, item)
                                                                 setChoosedSeat([...choosedSeat])
                                                             }
-                                                        }} >{item == "SOLD OUT" ? "" : item}</button>
+                                                        }} >{item === "SOLD OUT" ? "" : item}</button>
                                                         </div>
                                                         }
                                                     })}
@@ -179,7 +166,7 @@ function OrderPage() {
                             <div className="col-12 py-3 px-4 my-4 mx-0 mx-lg-3 bg-white shadow myrounded-2">
                                 <div className="py-4 border-bottom">
                                     <div className="d-flex text-center justify-content-center">
-                                        <img src={data.cinema_logo} />
+                                        <img src={data.cinema_logo} alt="cinema" />
                                     </div>
                                 </div>
                                 <div className="py-4 border-bottom">
@@ -207,10 +194,10 @@ function OrderPage() {
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-lg-4 my-2">
-                        <button class="mybtn mybtn-active myrounded-2 shadow py-3 w-100 font-weight-bold" onClick={
+                    <div class="col-12 col-sm-12 col-lg-4 my-3">
+                        <button class="mybtn mybtn-active myrounded-2 shadow py-3 w-100 font-weight-bold mb-4" onClick={
                             ()=>{
-                                if(choosedSeat.length == 0){
+                                if(choosedSeat.length === 0){
                                     swal("Oops", "pilih kursinya dulu", "error")
                                 }else{
                                     const detail_pesanan = {
@@ -236,6 +223,8 @@ function OrderPage() {
                 </section>
             </main>
         </div>
+        <Footer />
+        </>
     )
 }
 

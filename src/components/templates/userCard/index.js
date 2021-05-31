@@ -13,6 +13,7 @@ function UserCard() {
     })
     useEffect(()=>{
         setState({...state, avatar:user.img})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[user])
     const handleUpdateImage = ()=> {
         const form = new FormData()
@@ -50,11 +51,11 @@ function UserCard() {
                 </div>
             </div>
             <div className="w-100 text-center my-3">
-                <a className="myprimary-color c-pointer" style={{}} onClick={()=>{
+                <a href="!#" className="myprimary-color c-pointer" style={{}} onClick={()=>{
                     selectImage.current.click()
                 }}>Ubah Profil</a>
                 <input type="file" style={{position:"absolute", top:0, pointerEvents:"none", opacity:0}} ref={selectImage} onChange={(e)=>{
-                    if(e.target.files[0].type == "image/jpeg" || e.target.files[0].type == "image/jpg" || e.target.files[0].type == "image/png"){
+                    if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/jpg" || e.target.files[0].type === "image/png"){
                         if(e.target.files[0].size < 2000000){
                             setState({
                                 ...state,

@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from 'react'
 import { CardMovie } from '../../molekuls'
-import { MovieInfo } from '../../templates'
 import Modal from 'react-modal'
 import axios from 'axios'
 
@@ -22,16 +21,6 @@ function UpComing() {
             des: false
         },
         toggleModal: false,
-    })
-    const [movieInfo, setMovieInfo] = useState({
-        title: "",
-        synopsis: "",
-        genre: "",
-        releaseDate: "",
-        directedBy: "",
-        duration: "",
-        casts: "",
-        img: ""
     })
     const date = new Date()
     const month = date.getMonth()
@@ -70,6 +59,7 @@ function UpComing() {
         } else {
             setState({ ...state, month: { ...state, des: true } })
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_GET_TICKET_FILM}`)
@@ -79,13 +69,14 @@ function UpComing() {
             .catch(err=>{
                 console.log(err.response);
             })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     console.log("ini", data);
     return (
         <div className="my-5">
             <div class="col-12 d-flex justify-content-between">
                 <h5 class="font-weight-bold">UpComing Movies</h5>
-                <a href="#" class="color-primary">view all</a>
+                <span class="color-primary">view all</span>
             </div>
             <div class="row overflow-auto my-3">
                 <div class="col-lg-12 d-sm-flex d-md-flex d-lg-block">
@@ -309,7 +300,7 @@ function UpComing() {
             </div>
             <div className="d-flex overflow-auto py-5">
                 {data.map(mov => {
-                    if (mov.status == '0') {
+                    if (mov.status === '0') {
                         return <CardMovie title={mov.title} genre={mov.genre} img={mov.image} id_movie={mov.id_movie} onClick={() => {
                             setState({
                                 ...state, toggleModal: true, movieInfo: {

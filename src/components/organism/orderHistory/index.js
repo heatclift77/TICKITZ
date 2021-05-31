@@ -15,6 +15,7 @@ function OrderHistory() {
                 setHistoryTickets(response.data.data)
                 setPage(response.data.page)
             })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <div className="mt-5">

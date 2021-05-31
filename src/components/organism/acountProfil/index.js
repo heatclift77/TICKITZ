@@ -1,7 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import {Button, Input, SecondInput, InputTypePass} from '../../atoms';
-import { Link } from 'react-router-dom';
 import swal from 'sweetalert'
 import axios from 'axios';
 
@@ -55,7 +54,7 @@ function AcountProfil() {
     }
     function updatePassword(){
         if(newPassword !== '' || confirmPasword !== ''){
-            if(newPassword == confirmPasword){
+            if(newPassword === confirmPasword){
                 const token = localStorage.getItem('token')
                 axios({
                     method : 'PUT',
@@ -136,8 +135,8 @@ function AcountProfil() {
                 <div className="col-12 col-md-6 mb-3">
                     <InputTypePass label="New Password" placeholder="Write Your New Password" disabled={updatePassToggle ? false : true} onChange={(e)=>{
                         setNewPassword(e.target.value)
-                        if(e.target.value != ''){
-                            if(e.target.value == confirmPasword){
+                        if(e.target.value !== ''){
+                            if(e.target.value === confirmPasword){
                                 setButtonStyle('my-btn py-3 px-4 w-100 rounded') 
                             }else{
                                 setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none')
@@ -148,8 +147,8 @@ function AcountProfil() {
                 <div className="col-12 col-md-6 mb-3">
                     <InputTypePass label="Confirm Password" placeholder="Write again Your Password" disabled={updatePassToggle ? false : true}  onChange={(e)=>{
                         setConfirmPassword(e.target.value)
-                        if(e.target.value != ''){
-                            if(newPassword == e.target.value){
+                        if(e.target.value !== ''){
+                            if(newPassword === e.target.value){
                                 setButtonStyle('my-btn py-3 px-4 w-100 rounded') 
                             }else{
                                 setButtonStyle('py-3 px-4 w-100 rounded mybg-second text-white border-0 c-none')

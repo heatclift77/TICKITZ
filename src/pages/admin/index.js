@@ -22,7 +22,7 @@ function Admin() {
                     <div className="col-2 my-3">
                         <div className="bg-white w-100 rounded p-3 d-flex justify-content-center shadow" style={{minHeight:"300px"}}>
                             <div className="align-self-center">
-                                <a className="color-primary font-weight-bold hover-reduce-opacity" style={{cursor:"pointer"}}>Add Movie</a>
+                                <span className="color-primary font-weight-bold hover-reduce-opacity" style={{cursor:"pointer"}}>Add Movie</span>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ function Admin() {
                         return <div className="col-2 my-3">
                         <div className="bg-white w-100 rounded p-2 shadow">
                             <div className="rounded overflow-hidden">
-                                <img src={mov.image} className="w-100" />
+                                <img src={mov.image} className="w-100" alt="/" />
                             </div>
                             <h4 className="m-0 my-3 font-weight-bold text-center">{mov.title}</h4>
                             <button class="mybtn rounded fs-08 fw-600 mt-lg-3 w-100" onClick={()=>{history.push(`/app/admin/movieDetails/${mov.id_movie}`)}} >atur</button>

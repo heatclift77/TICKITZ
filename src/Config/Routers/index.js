@@ -1,23 +1,22 @@
 import React,{useEffect} from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import { SignIn, SignUp, Home, ProfilPage, MovieDetails, 
-    Payment ,OrderPage, ForgotPass, ConfirmNewPass, Admin, 
-    TicketResult, NotFoundPage, Movies, ChangeFilm, EditMovie} from '../../pages';
-import PrivateRoute from '../module/profilPage'
-import AdminRoute from '../module/admin'
-import AuthRoute from '../module/authRoute'
-import axios from 'axios'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { SignIn, SignUp, Home, ProfilPage, MovieDetails,
+    Payment ,OrderPage, ForgotPass, ConfirmNewPass, 
+    TicketResult, Movies, ChangeFilm, EditMovie} from '../../pages';
+import PrivateRoute from '../module/profilPage';
+import AuthRoute from '../module/authRoute';
+import axios from 'axios';
 
 const Routers = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     useEffect(()=>{
         const token = localStorage.getItem('token')
-        if(token == null){
+        if(token === null){
             dispatch({
                 type : 'SET_STATUS',
                 isLogin : false,
-            })
+            });
             // token kosong
         }else{
             axios({
@@ -35,12 +34,11 @@ const Routers = () => {
                         isLogin : false,
                     })
                 }
-                if(response.data.status == '400'){
+                if(response.data.status === '400'){
                     localStorage.removeItem('token')
                     // token invalid
-                }else if(response.data.status == '200'){
+                }else if(response.data.status === '200'){
                     // token valid
-                    const user = response.data.data[0]
                     dispatch({
                         type : 'SET_PROFIL_USER',
                         payload : {
@@ -84,12 +82,8 @@ const Routers = () => {
                 <PrivateRoute path='/app/profil_page' component={(props)=><ProfilPage {...props}/>} />
                 <PrivateRoute path='/app/payment' component={(props)=><Payment {...props}/>} />
                 <PrivateRoute path='/app/user/ticket/:id' component={(props)=><TicketResult {...props}/>} />
-                {/* <AdminRoute path='/app/Add_Product' component={(props)=><Admin {...props} />} /> */}
                 <Route path='/app/ListTayang/:code' component={MovieDetails} />
                 <Route path='/app/admin/movieDetails/:id' component={EditMovie} />
-                <Route path='/'>
-                    <Admin />
-                </Route>
                 <Route path='/'>
                     <Home />
                 </Route>

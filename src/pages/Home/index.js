@@ -38,13 +38,13 @@ export default function Home() {
                     <div className="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-center mt-4 py-4">
                         <div className="d-flex justify-content-center">
                             <div class="mt-4">
-                                <img src={hero1} className="mt-5 mr-4 shadow" />
+                                <img src={hero1} className="mt-5 mr-4 shadow" alt="/" />
                             </div>
                             <div class=" mt-2">
-                                <img src={hero2} className="mt-4 mr-4 shadow" />
+                                <img src={hero2} className="mt-4 mr-4 shadow" alt="/" />
                             </div>
                             <div class="">
-                                <img src={hero3} className="shadow" />
+                                <img src={hero3} className="shadow" alt="/" />
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ export default function Home() {
                 <div className="mt-7 nowShowingHeight">
                     <div class="col-12 d-flex justify-content-between">
                         <h5 class="font-weight-bold">Now Showing</h5>
-                        <a href="#" class="color-primary">view all</a>
+                        <span class="color-primary">view all</span>
                     </div>
                     <div className="d-flex overflow-auto py-5">
                         {data.map(mov => {
@@ -60,7 +60,7 @@ export default function Home() {
                                 state.toggleModal ? setState({ ...state, toggleModal: false }) : setState({ ...state, toggleModal: true })
                                 setMovieSelected(mov)
                             }} onClick={
-                                (e) => {
+                                () => {
                                     history.push(`/app/ListTayang/${mov.id_movie}`)
                                 }
                             } />
@@ -81,7 +81,7 @@ export default function Home() {
                 <div className="row overflow-auto">
                     <div className="col-12 col-lg-4">
                         <div className="border rounded p-2">
-                            <img src={movieSelected.image} className="rounded w-100" />
+                            <img src={movieSelected.image} className="rounded w-100" alt="/" />
                         </div>
                     </div>
                     <div className="col-8">
