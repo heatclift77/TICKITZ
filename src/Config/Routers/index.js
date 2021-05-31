@@ -26,38 +26,11 @@ const Routers = () => {
                     token : token
                 }
             })
-            .then(response=>{
-                if(response.data.status === 400){
-                    localStorage.removeItem("token")
-                    dispatch({
-                        type : 'SET_STATUS',
-                        isLogin : false,
-                    })
-                }
-                if(response.data.status === '400'){
-                    localStorage.removeItem('token')
-                    // token invalid
-                }else if(response.data.status === '200'){
-                    // token valid
-                    dispatch({
-                        type : 'SET_PROFIL_USER',
-                        payload : {
-                            id_user : response.data.data[0].id_user,
-                            email : response.data.data[0].email,
-                            password : response.data.data[0].password,
-                            firstname : response.data.data[0].firstName,
-                            lastname : response.data.data[0].lastName,
-                            telephone : response.data.data[0].telephone,
-                            username : response.data.data[0].username,
-                            img : response.data.data[0].img_profil,
-                            role : response.data.data[0].role
-                        }
-                    })
-                    dispatch({
-                        type : 'SET_STATUS',
-                        isLogin : true,
-                    })
-                }
+            .then((response)=>{
+                dispatch({
+                    type : 'SET_PROFIL_USER',
+                    payload : response.data.data[0]
+                })
             })
             .catch(err=>{
                 console.log(err);

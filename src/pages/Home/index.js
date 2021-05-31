@@ -67,9 +67,6 @@ export default function Home() {
                         })}
                     </div>
                 </div>
-                <div class="col-12 my-5">
-                    <h5 class="font-weight-bold">Choose genre</h5>
-                </div>
             </div>
             <Modal
                 isOpen={state.toggleModal}

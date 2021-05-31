@@ -23,8 +23,8 @@ const userState = (state = initialState, action) => {
             }
         case 'SET_PROFIL_USER':
             return {
-                ...state,
                 user: action.payload,
+                isLogin:true
             }
         case 'LOGOUT':
             return {

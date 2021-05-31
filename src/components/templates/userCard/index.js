@@ -12,7 +12,7 @@ function UserCard() {
         updateImageButtonToggle : false
     })
     useEffect(()=>{
-        setState({...state, avatar:user.img})
+        setState({...state, avatar:user.img_profil})
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[user])
     const handleUpdateImage = ()=> {

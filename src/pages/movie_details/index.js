@@ -11,7 +11,11 @@ function MovieDetails() {
     const { user } = useSelector(state => state.user)
     const history = useHistory()
     const [movie, setMovie] = useState({})
-    const [cinema, setCinema] = useState([])
+    const [cinema, setCinema] = useState({
+        loading : false,
+        data : [],
+        isNotFound : false
+    })
     const { code } = useParams();
     const [cinemaSelected, setCinemaSelected] = useState("")
     const [jamTayang, setJamTayang] = useState("")
@@ -22,9 +26,14 @@ function MovieDetails() {
         list: ["ALL","JAKARTA", "SEMARANG", "SURABAYA", "BALI"]
     })
     useEffect(() => {
+        setCinema({...cinema, loading:true})
         axios.get(`${process.env.REACT_APP_SERVER}/v1/cinema?limit=${limit}&offset=0`)
             .then(response => {
-                setCinema(response.data.data)
+                if(response.data.data.length === 0){
+                    setCinema({...cinema, isNotFound:true})
+                }else{
+                    setCinema({loading:false, data:response.data.data, isNotFound:false})
+                }
                 setPage(response.data.page);
             })
             .catch(err => {
@@ -68,9 +77,14 @@ function MovieDetails() {
                                 </div>
                                 <div className="d-flex justify-content-start">
                                     <select className="w-50 border rounded py-2 px-3 mr-auto" style={{outline:"none"}} onChange={(e)=> {
+                                        setCinema({...cinema, loading:true})
                                         axios.get(`${process.env.REACT_APP_SERVER}/v1/cinema/sort?kota=${e.target.value}&limit=${limit}&offset=0`)
                                         .then(response => {
-                                            setCinema(response.data.data)
+                                            if(response.data.data.length === 0){
+                                                setCinema({...cinema, isNotFound:true})
+                                            }else{
+                                                setCinema({loading:false, data:response.data.data, isNotFound:false})
+                                            }
                                             setPage(response.data.page);
                                         })
                                     }} >
@@ -85,7 +99,7 @@ function MovieDetails() {
                 </div>
                 {/* card */}
                 <div className="row">
-                    {cinema.map((item, indexCard) => {
+                    {cinema.data.map((item, indexCard) => {
                         return <div className="col-12 col-md-6 col-lg-4">
                             <div className="row myrounded-2 my-3 py-4 mx-1 border shadow">
                                 <div className="col-12">
@@ -153,17 +167,18 @@ function MovieDetails() {
                         <div className="d-flex">
                             {(page.map(page=>{
                                 return <button className={paginationSelected === page.number ? "pagination pagination-active mx-2" : "pagination mx-2"} onClick={()=>{
+                                    setCinema({...cinema, loading:true})
                                     axios.get(page.link)
                                         .then(res => {
                                             setPaginationSelected(page.number)
-                                            setCinema(res.data.data)
+                                            setCinema({...cinema, loading:false, data:res.data.data})
                                             setPage(res.data.page);
                                         })
                                 }} >{page.number}</button>
                             }))}
                         </div>
                     </div>
-                    <div className={cinema.length === 0 ? "col-12" : "hide"}>
+                    <div className={cinema.isNotFound ? "col-12" : "hide"} style={{minHeight:"400px"}}>
                         <h2 className="text-center my-5">
                             Maaf mungkin di Kota anda saat ini belum ada <strong className="text-danger">404</strong>
                         </h2>

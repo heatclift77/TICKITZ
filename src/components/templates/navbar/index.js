@@ -34,7 +34,7 @@ function Navbar() {
         history.push("/app/movies")
     }
     useEffect(()=>{
-        setAvatar(user.img)
+        setAvatar(user.img_profil)
     },[user])
     return (
         <nav className="row bg-white position-fixed fixed-top shadow">
