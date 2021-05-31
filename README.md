@@ -48,7 +48,7 @@ npm start
  </span> 
  
 ## 💻 Live Demo <a name = "live_demo"></a>
-https://github.com/heatclift77/TICKITZ
+https://ticket-tickitz.netlify.app
 
 ## Backend
 #### Repo Backend : https://github.com/heatclift77/tickitz_api
